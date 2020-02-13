@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mymood/services/auth.dart';
+
 
 class Register extends StatefulWidget {
   @override
@@ -9,9 +11,11 @@ class _RegisterState extends State<Register> {
 
   final Color indigo = const Color.fromARGB(255, 56, 56, 223);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  String email;
-  String password;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   bool _autoValidate = false;
+
+  final AuthService _auth = AuthService();
   
 
   @override
@@ -50,28 +54,43 @@ class _RegisterState extends State<Register> {
                     children: <Widget>[
                       TextFormField(
                         decoration: const InputDecoration(labelText: 'อีเมล์'),
-                        onSaved: (String value) {
-                          email = value;
-                        },
+                        controller: _emailController,
                         validator: emailValidation,
                       ),
 
                       TextFormField(
                         decoration: const InputDecoration(labelText: 'รหัสผ่าน'),
-                        onSaved: (String value) {
-                          password = value;
-                        },
-                        validator: emailValidation,
+                        controller: _passwordController,
                         obscureText: true,
                       ),
 
+                      //TODO: เช็คว่าตรงกับรหัสข้างบนมั้ย
+
                       TextFormField(
                         decoration: const InputDecoration(labelText: 'ยืนยันรหัสผ่าน'),
-                        onSaved: (String value) {
-                          email = value;
-                        },
-                        validator: emailValidation,
                         obscureText: true,
+                      ),
+
+                      Container(
+                        margin: EdgeInsets.only(top:35),
+                        child: RaisedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState.validate()) {
+                            _auth.registerUser(_emailController.text.trim(),_passwordController.text.trim());
+                          }
+                        },
+                        color: indigo,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(20.0),
+                        ),
+                        elevation: 0,
+                        padding: EdgeInsets.symmetric(horizontal:30.0,vertical: 10.0),
+                        child: Text(
+                          'สมัครสมาชิกเลย',
+                          style:
+                            TextStyle(fontFamily: 'Prompt', fontSize: 22, color: Colors.white, fontWeight: FontWeight.w600),
+                        ),
+                      ),
                       ),
 
                     ],
@@ -79,22 +98,7 @@ class _RegisterState extends State<Register> {
                       )
                 ),
                                               
-                      RaisedButton(
-                        onPressed: () {
-                                                  
-                        },
-                        color: indigo,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(20.0),
-                        ),
-                        elevation: 0,
-                        padding: EdgeInsets.symmetric(horizontal:30.0,vertical: 8.0),
-                        child: Text(
-                          'สมัครสมาชิกเลย',
-                          style:
-                            TextStyle(fontFamily: 'Prompt', fontSize: 22, color: Colors.white, fontWeight: FontWeight.w600),
-                        ),
-                      ),
+                      
               ],
             ),
           ),

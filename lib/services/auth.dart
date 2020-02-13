@@ -19,6 +19,17 @@ class AuthService {
 
   // register
 
+  Future registerUser(String email, String password) async {
+    print(email);
+    print(password);
+    final FirebaseUser user = (await _auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    ))
+        .user;
+
+  }
+
 
   // sign out
 
