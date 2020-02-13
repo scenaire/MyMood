@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "639222084905",
+    "firebase_url": "https://mymood-c4e80.firebaseio.com",
+    "project_id": "mymood-c4e80",
+    "storage_bucket": "mymood-c4e80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639222084905:android:51e5d2e9d9842e6e24f338",
+        "android_client_info": {
+          "package_name": "com.scenaire.andriod.mymood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639222084905-qpectrlc8aotpjhb1en8klnr7bikvjgo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsbYIkuDh_UBCDl9tes9YEI7pSQE3_LEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639222084905-qpectrlc8aotpjhb1en8klnr7bikvjgo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639222084905-mmae93lcvemvosepv2n56ohj2a92dqqv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.scenaire.ios.mymood"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

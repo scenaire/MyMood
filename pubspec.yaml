@@ -24,6 +24,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
 
+  #Firebase
+  cloud_firestore: ^0.13.1
+  firebase_auth: ^0.15.4
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -70,3 +75,19 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+  fonts: 
+    - family: Anakotmai Medium
+      fonts:
+        - asset: fonts/Anakotmai-Medium.ttf
+    
+    - family: Prompt
+      fonts:
+        - asset: fonts/Prompt-Regular.ttf
+        - asset: fonts/Prompt-Medium.ttf
+          weight: 700
+
+  assets:
+    - assets/pictures/
+  
+  
