@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymood/screens/authenticate/forgotten.dart';
+import 'package:mymood/screens/home/home.dart';
+import 'package:mymood/services/auth.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -8,23 +10,24 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
 
-  final Color indigo = const Color.fromARGB(255, 56, 56, 223);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String email;
   String password;
   bool _autoValidate = false;
 
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
             var iconThemeData = IconThemeData(
-              color: indigo);
+              color: Theme.of(context).primaryColor);
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             iconTheme: iconThemeData,
             elevation: 0,
-            title: Text('เข้าสู่ระบบ', style: TextStyle(fontFamily: 'Anakotmai Medium', color: indigo),),
+            title: Text('เข้าสู่ระบบ', style: TextStyle(fontFamily: 'Anakotmai Medium', color: Theme.of(context).primaryColor),),
             centerTitle: true,
           ),
           body: Center(
@@ -70,9 +73,9 @@ class _SignInState extends State<SignIn> {
                                               
                       RaisedButton(
                         onPressed: () {
-                                                  
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
                         },
-                        color: indigo,
+                        color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(20.0),
                         ),
@@ -103,7 +106,7 @@ class _SignInState extends State<SignIn> {
                         child: Text(
                         'ลืมรหัสผ่าน',
                           style: 
-                            TextStyle(fontFamily: 'Prompt', fontSize: 14, color: indigo),
+                            TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Theme.of(context).primaryColor),
                         ),
                       )
                     ]

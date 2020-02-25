@@ -6,21 +6,19 @@ class ForgottenPassword extends StatefulWidget {
 }
 
 class _ForgottenPasswordState extends State<ForgottenPassword> {
-  
-  final Color indigo = const Color.fromARGB(255, 56, 56, 223);
 
   String email;
   
   @override
   Widget build(BuildContext context) {
-    var iconThemeData = IconThemeData(color: indigo);
+    var iconThemeData = IconThemeData(color: Theme.of(context).primaryColor);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
             backgroundColor: Colors.transparent,
             iconTheme: iconThemeData,
             elevation: 0,
-            title: Text('ลืมรหัสผ่าน', style: TextStyle(fontFamily: 'Anakotmai Medium', color: indigo),),
+            title: Text('ลืมรหัสผ่าน', style: TextStyle(fontFamily: 'Anakotmai Medium', color: Theme.of(context).primaryColor),),
             centerTitle: true,
           ),
       body: Center(
@@ -75,7 +73,7 @@ class _ForgottenPasswordState extends State<ForgottenPassword> {
                         onPressed: () {
                                                   
                         },
-                        color: indigo,
+                        color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(20.0),
                         ),

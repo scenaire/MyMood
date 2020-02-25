@@ -3,9 +3,6 @@ import 'package:mymood/screens/authenticate/register.dart';
 import 'package:mymood/screens/authenticate/sign_in.dart';
 
 class FirstPage extends StatelessWidget {
-
-  final Color indigo = const Color.fromARGB(255, 56, 56, 223);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +20,7 @@ class FirstPage extends StatelessWidget {
                   child: Text(
                   'ยินดีต้อนรับ',
                   style: 
-                    TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 28, color: indigo),
+                    TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 28, color: Theme.of(context).primaryColor),
                   ),
                 ),
 
@@ -54,7 +51,7 @@ class FirstPage extends StatelessWidget {
                   onPressed: () {
                     navigateToRegister(context);
                   },
-                  color: indigo,
+                  color: Theme.of(context).primaryColor,
                   shape: RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(20.0),
                   ),
@@ -84,7 +81,7 @@ class FirstPage extends StatelessWidget {
                         child: Text(
                         'เข้าสู่ระบบ',
                           style: 
-                            TextStyle(fontFamily: 'Prompt', fontSize: 14, color: indigo),
+                            TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Theme.of(context).primaryColor),
                         ),
                       )
                     ]

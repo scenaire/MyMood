@@ -9,7 +9,6 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
-  final Color indigo = const Color.fromARGB(255, 56, 56, 223);
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -21,18 +20,18 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
         var iconThemeData = IconThemeData(
-              color: indigo);
+              color: Theme.of(context).primaryColor);
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             iconTheme: iconThemeData,
             elevation: 0,
-            title: Text('สมัครสมาชิก', style: TextStyle(fontFamily: 'Anakotmai Medium', color: indigo),),
+            title: Text('สมัครสมาชิก', style: TextStyle(fontFamily: 'Anakotmai Medium', color: Theme.of(context).primaryColor),),
             centerTitle: true,
           ),
           body: Center(
-        child: SingleChildScrollView(
+          child: SingleChildScrollView(
           padding: EdgeInsets.only(bottom:30),
           child: Center(
             child: Column(
@@ -79,7 +78,7 @@ class _RegisterState extends State<Register> {
                             _auth.registerUser(_emailController.text.trim(),_passwordController.text.trim());
                           }
                         },
-                        color: indigo,
+                        color: Theme.of(context).primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(20.0),
                         ),
