@@ -3,6 +3,7 @@ import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:mymood/screens/authenticate/first_page.dart';
 import 'package:mymood/screens/home/my_mood_icon_icons.dart';
 import 'package:mymood/screens/home/navpage/moodPage/moodHome.dart';
+import 'package:mymood/services/auth.dart';
 
 import 'navpage/article/article.dart';
 import 'navpage/homepage/homescreen.dart';
@@ -17,6 +18,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final AuthService _auth = AuthService();
   int currentIndex;
 
   //page setup
@@ -45,7 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
     var iconThemeData = IconThemeData(color: Colors.white);
 
     return Scaffold(
-
       backgroundColor: Colors.white,
 
       //*********************Appbar */
@@ -53,46 +54,50 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).primaryColor,
         iconTheme: iconThemeData,
         elevation: 0,
-        title: Text('MOOD DAY', style: TextStyle(fontFamily: 'Anakotmai Medium'),),
+        title: Text(
+          'MOOD DAY',
+          style: TextStyle(fontFamily: 'Anakotmai Medium'),
+        ),
         centerTitle: true,
-        
       ),
 
       //*********************Sliding Menu */
       drawer: ClipRRect(
         borderRadius: BorderRadius.circular(23.0),
         child: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: <Widget> [
-              DrawerHeader(
-                child: Text('สาลี่'),
-              ),
-              ListTile(
-                title: Text('จัดการโปรไฟล์'),
-                onTap: () {  },
-              ),
-              ListTile(
-                title: Text('ออกจากระบบ'),
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> FirstPage()));
-                },
-              )
-            ]
-          ),
+          child: ListView(padding: EdgeInsets.zero, children: <Widget>[
+            DrawerHeader(
+              child: Text('สาลี่'),
+            ),
+            ListTile(
+              title: Text('จัดการโปรไฟล์'),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('ออกจากระบบ'),
+              onTap: () async {
+                await _auth.signOut();
+                Navigator.pop(context);
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FirstPage()));
+              },
+            )
+          ]),
         ),
       ),
 
       //*********************Body */
       body: _pageOptions[currentIndex],
 
-
       //*********************Bubble Navigator Bar */
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=> MoodHome()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => MoodHome()));
         },
-        child: Icon(Icons.add, color: Colors.white,),
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
         backgroundColor: Theme.of(context).accentColor,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
@@ -102,9 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
         opacity: .2,
         currentIndex: currentIndex,
         onTap: changePage,
-        borderRadius: BorderRadius.vertical(
-            top: Radius.circular(
-                16)),
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
         elevation: 8,
         items: <BubbleBottomBarItem>[
           BubbleBottomBarItem(
@@ -117,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.home,
                 color: Theme.of(context).primaryColor,
               ),
-              title: Text("หน้าแรก",style: TextStyle(fontFamily: 'prompt'))),
+              title: Text("หน้าแรก", style: TextStyle(fontFamily: 'prompt'))),
           BubbleBottomBarItem(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
@@ -128,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.dashboard,
                 color: Theme.of(context).primaryColor,
               ),
-              title: Text("สรุปผล",style: TextStyle(fontFamily: 'prompt'))),
+              title: Text("สรุปผล", style: TextStyle(fontFamily: 'prompt'))),
           BubbleBottomBarItem(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
@@ -139,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 MyMoodIcon.moon,
                 color: Theme.of(context).primaryColor,
               ),
-              title: Text("การนอน",style: TextStyle(fontFamily: 'prompt'))),
+              title: Text("การนอน", style: TextStyle(fontFamily: 'prompt'))),
           BubbleBottomBarItem(
               backgroundColor: Theme.of(context).primaryColor,
               icon: Icon(
@@ -150,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Icons.book,
                 color: Theme.of(context).primaryColor,
               ),
-              title: Text("บทความ",style: TextStyle(fontFamily: 'prompt')))
+              title: Text("บทความ", style: TextStyle(fontFamily: 'prompt')))
         ],
       ),
     );

@@ -82,7 +82,7 @@ class _MoodHomeState extends State<MoodHome> {
                       child: Slider(
                         min: 0.0,
                         max: 5.0,
-                        divisions: 100,
+                        divisions: 150,
                         value: sliderValue,
                         activeColor: moodColor,
                         inactiveColor: Colors.blueGrey[100],

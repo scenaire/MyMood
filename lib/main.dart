@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mymood/screens/wrapper.dart';
+import 'package:mymood/services/auth.dart';
+import 'package:provider/provider.dart';
+
+import 'models/user.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,8 +12,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
+    return StreamProvider<User>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+        theme: ThemeData(
         primaryColor: const Color.fromARGB(255,0, 68, 69),
         accentColor: const Color.fromARGB(255, 248, 180, 0),
         brightness: Brightness.light,
@@ -19,7 +25,9 @@ class MyApp extends StatelessWidget {
           body1: TextStyle(fontFamily: 'prompt', fontSize:16.0, color: Colors.grey[800]),
         )
       ),
-      home: Wrapper(),
+      home: Wrapper()
+      ),
     );
   }
 }
+
