@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mymood/screens/home/home.dart';
-import 'package:mymood/services/auth.dart';
-import 'package:mymood/widgets/loading.dart';
+import 'package:mymood/Screens/Home/MyHomePage.dart';
+import 'package:mymood/Services/Auth.dart';
+import 'package:mymood/Widgets/loadingPage.dart';
 import 'package:password_strength/password_strength.dart';
 
 class Register extends StatefulWidget {
@@ -109,7 +109,7 @@ class _RegisterState extends State<Register> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                MyHomePage()));
+                                                MyHomePage(user: result)));
                                   }
                                 }
                               },
@@ -177,6 +177,8 @@ class _RegisterState extends State<Register> {
     } else if (passwordStr < 0.7) {
       return null;
     }
+
+    return null;
 
   }
 

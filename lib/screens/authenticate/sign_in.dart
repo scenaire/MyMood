@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mymood/screens/authenticate/forgotten.dart';
-import 'package:mymood/screens/home/home.dart';
-import 'package:mymood/services/auth.dart';
-import 'package:mymood/widgets/loading.dart';
+import 'package:mymood/Screens/Home/MyHomePage.dart';
+import 'package:mymood/Services/Auth.dart';
+import 'package:mymood/Widgets/loadingPage.dart';
+
+import 'forgotten.dart';
 
 class SignIn extends StatefulWidget {
   @override
@@ -83,7 +84,8 @@ class _SignInState extends State<SignIn> {
                             } else {
                               setState(() {
                                 loading = false;
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                                print("hi there you now you'll transfer to homepage with account: " + result.uid);
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: result)));
                               });
                             }
                           }

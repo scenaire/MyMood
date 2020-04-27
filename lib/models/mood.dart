@@ -1,38 +1,39 @@
+import 'package:mymood/Services/UserCloudFirestore.dart';
+
 enum MoodEnums {
-  AWFUL,
-  BAD,
-  NORMAL,
-  GOOD,
-  JOYFUL
+  Depress,
+  Unhappy,
+  Normal,
+  Happy,
+  Maniac
 }
 
 class Mood {
 
-  MoodEnums mood;
+  String type;
+  DateTime time;
+  bool fav = false;
+  String message = '';
 
-  Mood () {
-    mood = MoodEnums.NORMAL;
+  UserCloudFirestore uc = UserCloudFirestore();
+
+  Mood(String type, DateTime time, String message, bool fav) {
+    this.type = type;
+    this.time = time;
+    this.message = message;
+    this.fav = fav;
   }
 
-  void setMood(MoodEnums newMood) {
-    mood = newMood;
+  get getMessage {
+    return this.message;
   }
 
-  String getMoodinString() {
-    var str;
-    switch(mood) {
-      case MoodEnums.BAD: str = "รู้สึกแย่"; break;
-      case MoodEnums.NORMAL: str = "เฉยๆ"; break;
-      case MoodEnums.GOOD: str = "รู้สึกดี"; break;
-      case MoodEnums.JOYFUL: str = "มีความสุขมาก"; break;
-      case MoodEnums.AWFUL : str = "เศร้า"; break;
-      default : str = "พัง";
-    }
-    return str;
+  get getType {
+    return this.type;
   }
 
+  
+  
 
-
-
-}
-
+  
+  }

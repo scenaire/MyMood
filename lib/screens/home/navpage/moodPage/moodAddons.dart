@@ -1,15 +1,43 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mymood/screens/home/home.dart';
+import 'package:mymood/Models/Mood.dart';
+import 'package:mymood/Models/User.dart';
+import 'package:mymood/Services/MoodCloudFirestore.dart';
+
+import '../../MyHomePage.dart';
 
 class MoodAddons extends StatefulWidget {
+  final String moodToSend;
+  final DateTime date;
+  final User user;
+
+  MoodAddons({Key key, this.user, this.moodToSend, this.date}) : super (key: key);
+
   @override
   _MoodAddonsState createState() => _MoodAddonsState();
 }
 
 class _MoodAddonsState extends State<MoodAddons> {
+  
+  
+  final messageController = TextEditingController();
+  
+
+  Mood mood;
+  String msg;
+  bool fav = false;
+
+
+  @override
+  void dispose() {
+    messageController.dispose();
+    super.dispose();
+  }
+  
   @override
   Widget build(BuildContext context) {
     var iconThemeData = IconThemeData(color: Theme.of(context).primaryColor);
+    
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -22,24 +50,38 @@ class _MoodAddonsState extends State<MoodAddons> {
       body: Container(
         padding: EdgeInsets.only(top: 20),
         child: Center(
-            child: Column(
+            child: SingleChildScrollView(
+              child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'คุณทำอะไรบ้าง',
-              style: Theme.of(context).textTheme.headline,
+            Container(
+              padding: const EdgeInsets.only(
+                top: 20,
+                bottom: 20
+              ),
+              child: Text(
+                'คุณรู้สึกอะไรอยู่',
+                style: Theme.of(context).textTheme.headline,
+              ),
             ),
             Container(
-              height: MediaQuery.of(context).copyWith().size.height / 4,
-              width: MediaQuery.of(context).copyWith().size.width,
-              color: Colors.amber[200],
-              child: Text('สำหรับใส่ Widget เลือกอิโมติคอน'),
-            ),
-            Container(
-              height: MediaQuery.of(context).copyWith().size.height / 3 + 30.0,
-              width: MediaQuery.of(context).copyWith().size.width,
-              color: Colors.lightGreen[200],
-              child: Text('สำหรับใส่ Widget Text'),
+              
+              width: MediaQuery.of(context).copyWith().size.width/1.1,
+              child: TextField(
+                controller: messageController,
+                keyboardType: TextInputType.multiline,
+                maxLines: null,
+                decoration: InputDecoration(
+                  hintText: "เกิดอะไรขึ้นบ้าง ลองเล่าให้เราฟังหน่อยสิ",
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).primaryColor,
+                      style: BorderStyle.solid
+                    )
+                  ),
+                )
+              )
             ),
             Container(
               padding: EdgeInsets.only(top:20.0),
@@ -48,10 +90,19 @@ class _MoodAddonsState extends State<MoodAddons> {
                 color: Theme.of(context).primaryColor,
                 shape: RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
                 padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 12.0),
-                onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage()));
+                onPressed: () async { 
+                  MoodCloudFirestore mc = MoodCloudFirestore(uid: widget.user.uid);
+                  msg = messageController.text;
+                  mood = new Mood(widget.moodToSend,widget.date,msg,fav);
+                  dynamic result = await mc.addMoodtoUser(mood);
+                  if (result != null) {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(user: widget.user)));
+                  }
             }))
           ],
-        )),
+        ),
+            )
+        ),
       ),
     );
   }

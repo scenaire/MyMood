@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mymood/screens/authenticate/register.dart';
-import 'package:mymood/screens/authenticate/sign_in.dart';
+
+import 'Register.dart';
+import 'sign_in.dart';
+
 
 class FirstPage extends StatelessWidget {
   @override

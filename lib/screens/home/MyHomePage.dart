@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'package:mymood/screens/authenticate/first_page.dart';
+import 'package:mymood/Models/User.dart';
+import 'package:mymood/Screens/Authenticate/Firstpage.dart';
+import 'package:mymood/Services/Auth.dart';
 import 'package:mymood/screens/home/my_mood_icon_icons.dart';
-import 'package:mymood/screens/home/navpage/moodPage/moodHome.dart';
-import 'package:mymood/services/auth.dart';
 
 import 'navpage/article/article.dart';
 import 'navpage/homepage/homescreen.dart';
+import 'navpage/moodpage/moodHome.dart';
 import 'navpage/sleeppage/sleep.dart';
 import 'navpage/summary/summary.dart';
 
+
+
+
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  
+  
+  final User user;
+
+  MyHomePage({Key key, this.user}) : super(key: key);
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -20,14 +28,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final AuthService _auth = AuthService();
   int currentIndex;
+  
 
-  //page setup
-  final _pageOptions = [
-    HomeScreen(),
-    SummaryPage(),
-    SleepPage(),
-    ArticlePage(),
-  ];
+  
 
   @override
   void initState() {
@@ -44,19 +47,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var iconThemeData = IconThemeData(color: Colors.white);
+
+
+    //page setup
+  final pageOptions = [
+    HomeScreen(user: widget.user,),
+    SummaryPage(),
+    SleepPage(),
+    ArticlePage(),
+  ];
+    
+
+
+    var iconThemeData = IconThemeData(color: const Color.fromARGB(255, 40, 40, 40));
 
     return Scaffold(
       backgroundColor: Colors.white,
 
       //*********************Appbar */
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Colors.white,
         iconTheme: iconThemeData,
         elevation: 0,
         title: Text(
           'MOOD DAY',
-          style: TextStyle(fontFamily: 'Anakotmai Medium'),
+          style: TextStyle(fontFamily: 'Anakotmai Medium', color: const Color.fromARGB(255, 40, 40, 40)),
         ),
         centerTitle: true,
       ),
@@ -67,18 +82,49 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Drawer(
           child: ListView(padding: EdgeInsets.zero, children: <Widget>[
             DrawerHeader(
-              child: Text('สาลี่'),
+              child: Text(
+                      "สาลี่",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 25, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
             ),
             ListTile(
-              title: Text('จัดการโปรไฟล์'),
+              title: Text(
+                      "จัดการโปรไฟล์",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
               onTap: () {},
             ),
             ListTile(
-              title: Text('ออกจากระบบ'),
+              title: Text(
+                      "ทำแบบประเมินสุขภาพจิต",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                      "ประวัติการทำแบบประเมินสุขภาพจิต",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                      "ค้นหาคลีนิคสุขภาพจิตใกล้คุณ",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                      "ออกจากระบบ",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.red, fontWeight: FontWeight.w600),
+                    ),
               onTap: () async {
                 await _auth.signOut();
                 Navigator.pop(context);
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => FirstPage()));
+                
               },
             )
           ]),
@@ -86,13 +132,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
 
       //*********************Body */
-      body: _pageOptions[currentIndex],
+      body: pageOptions[currentIndex],
 
       //*********************Bubble Navigator Bar */
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => MoodHome()));
+              context, MaterialPageRoute(builder: (context) => MoodHome(user: widget.user,)));
         },
         child: Icon(
           Icons.add,

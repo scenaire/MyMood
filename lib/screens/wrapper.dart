@@ -1,8 +1,10 @@
+  
 import 'package:flutter/material.dart';
-import 'package:mymood/models/user.dart';
-import 'package:mymood/screens/authenticate/authenticate.dart';
-import 'package:mymood/screens/home/home.dart';
+import 'package:mymood/Models/User.dart';
+import 'package:mymood/Screens/Authenticate/Firstpage.dart';
 import 'package:provider/provider.dart';
+
+import 'Home/MyHomePage.dart';
 
 class Wrapper extends StatelessWidget {
   @override
@@ -10,9 +12,9 @@ class Wrapper extends StatelessWidget {
     final user = Provider.of<User>(context);
     
     if (user == null) {
-      return Authenticate();
+      return FirstPage();
     } else {
-      return MyHomePage();
+      return MyHomePage(user: user,);
     }
   }
 }

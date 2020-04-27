@@ -17,6 +17,24 @@ class THCalendar {
     }
   }
 
+  String changetoThaiDate (DateTime date) {
+
+    String formattedDate = DateFormat('dd-MM-yyyy').format(date);
+    var splitArr = formattedDate.split('-');
+
+    String timeFormatted = DateFormat('HH:mm').format(date);
+
+    return splitArr[0]+" "+monthInThai(splitArr[1])+" "+toBuddhistEra(splitArr[2]);
+
+  }
+
+  String timeFormatted (DateTime date) {
+    String timeFormatted = DateFormat('HH:mm').format(date);
+    return timeFormatted;
+  }
+
+
+
   String monthInThai(var month) {
     String monthTh;
     switch (month) {

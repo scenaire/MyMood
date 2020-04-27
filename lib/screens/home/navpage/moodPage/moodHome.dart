@@ -1,10 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mymood/screens/home/home.dart';
-import 'package:mymood/screens/home/navpage/moodPage/moodAddons.dart';
-import 'package:mymood/services/thCalendar.dart';
+import 'package:mymood/Models/User.dart';
+import 'package:mymood/Services/thCalendar.dart';
+
+import 'moodAddons.dart';
+import 'package:mymood/Models/Mood.dart';
+
 
 class MoodHome extends StatefulWidget {
+
+  final User user;
+
+  MoodHome({Key key, this.user}) : super(key: key);
+
   @override
   _MoodHomeState createState() => _MoodHomeState();
 }
@@ -16,18 +24,23 @@ class _MoodHomeState extends State<MoodHome> {
   var sliderValue = 2.5;
   var moodColor = Colors.grey;
   String moodString = "เฉยๆ";
+  String moodE = "Normal";
 
   List<String> moodStringList = [
-    "เศร้า",
+    "เศร้ามาก",
     "รู้สึกแย่",
-    "เฉยๆ",
+    "ปกติ",
     "รู้สึกดี",
     "มีความสุขมาก"
   ];
 
+    AssetImage moodImage = AssetImage('assets/pictures/normal.png');
+
+
+
   @override
   Widget build(BuildContext context) {
-    var iconThemeData = IconThemeData(color: Theme.of(context).primaryColor);
+    var iconThemeData = IconThemeData(color: const Color.fromARGB(255, 40, 40, 40));
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -60,8 +73,7 @@ class _MoodHomeState extends State<MoodHome> {
                   style: TextStyle(
                       fontFamily: 'prompt',
                       fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueGrey[400]),
+                      color: Colors.grey[400]),
                 ),
                 padding: EdgeInsets.all(20),
               ),
@@ -70,7 +82,7 @@ class _MoodHomeState extends State<MoodHome> {
                   children: <Widget>[
                     Container(
                       height: MediaQuery.of(context).copyWith().size.height / 3,
-                      color: moodColor,
+                      child: Image(image: moodImage,),
                     ),
                     Center(
                       child: Text(
@@ -90,24 +102,34 @@ class _MoodHomeState extends State<MoodHome> {
                           setState(() {
                             sliderValue = newValue;
                             if (sliderValue > 0.0 && sliderValue <= 1.0) {
-                              moodColor = Colors.red;
+                              moodColor = Colors.deepPurple;
                               moodString = moodStringList[0];
+                              moodImage = AssetImage("assets/pictures/depress.png");
+                              moodE = "Depress";
                             } else if (sliderValue > 1.0 &&
                                 sliderValue <= 2.0) {
-                              moodColor = Colors.indigo;
+                              moodColor = Colors.blue;
                               moodString = moodStringList[1];
+                              moodImage = AssetImage("assets/pictures/sad.png");
+                              moodE = "Unhappy";
                             } else if (sliderValue > 2.0 &&
                                 sliderValue <= 3.0) {
                               moodColor = Colors.blueGrey;
                               moodString = moodStringList[2];
+                              moodImage = AssetImage("assets/pictures/normal.png");
+                              moodE = "Normal";
                             } else if (sliderValue > 3.0 &&
                                 sliderValue <= 4.0) {
                               moodColor = Colors.amber;
                               moodString = moodStringList[3];
+                              moodImage = AssetImage("assets/pictures/happy.png");
+                              moodE = "Happy";
                             } else if (sliderValue > 4.0 &&
                                 sliderValue <= 5.0) {
                               moodColor = Colors.pink;
                               moodString = moodStringList[4];
+                              moodImage = AssetImage("assets/pictures/mania.png");
+                              moodE = "Maniac";
                             }
                           });
                         },
@@ -130,27 +152,6 @@ class _MoodHomeState extends State<MoodHome> {
                           shape: RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(10.0)),
                           child: Text(
-                            'บันทึก',
-                            style: TextStyle(
-                                fontFamily: 'prompt',
-                                fontSize: 20.0,
-                                color: Colors.white),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 30.0, vertical: 10.0),
-                          onPressed: () {
-                            Navigator.pop(context, MaterialPageRoute(builder: (context) => MyHomePage()));
-                          },
-                        ),
-                      )),
-                      Expanded(
-                          child: Container(
-                        padding: EdgeInsets.all(20),
-                        child: RaisedButton(
-                          color: Theme.of(context).primaryColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(10.0)),
-                          child: Text(
                             'ถัดไป',
                             style: TextStyle(
                                 fontFamily: 'prompt',
@@ -160,7 +161,7 @@ class _MoodHomeState extends State<MoodHome> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 30.0, vertical: 10.0),
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => MoodAddons()));
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => MoodAddons(user: widget.user, moodToSend: moodE, date: date)));
                           },
                         ),
                       )),

@@ -1,4 +1,6 @@
-import 'package:mymood/models/api/userCloudFirestore.dart';
+
+
+import 'package:mymood/Services/UserCloudFirestore.dart';
 
 class User {
 
@@ -8,7 +10,7 @@ class User {
   String telephone;
   String avatar;
 
-  userCloudFirestore uc = userCloudFirestore();
+  UserCloudFirestore uc = UserCloudFirestore();
   
   User({
     this.uid
@@ -21,6 +23,8 @@ class User {
     avatar = _avatar;
     uc.createUser(this);
   }
+
+ 
 
 
 }
