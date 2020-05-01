@@ -85,7 +85,7 @@ class _SignInState extends State<SignIn> {
                               setState(() {
                                 loading = false;
                                 print("hi there you now you'll transfer to homepage with account: " + result.uid);
-                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: result)));
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: result, currentPage: 0,)));
                               });
                             }
                           }

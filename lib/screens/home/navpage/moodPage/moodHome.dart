@@ -4,7 +4,6 @@ import 'package:mymood/Models/User.dart';
 import 'package:mymood/Services/thCalendar.dart';
 
 import 'moodAddons.dart';
-import 'package:mymood/Models/Mood.dart';
 
 
 class MoodHome extends StatefulWidget {
@@ -18,6 +17,8 @@ class MoodHome extends StatefulWidget {
 }
 
 class _MoodHomeState extends State<MoodHome> {
+  
+
   var date = DateTime.now();
   final THCalendar _thCalendar = THCalendar();
 
@@ -56,7 +57,7 @@ class _MoodHomeState extends State<MoodHome> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                'สวัสดีสาลี่',
+                'สวัสดี',
                 style: Theme.of(context).textTheme.headline,
               ),
               Text(

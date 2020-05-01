@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mymood/Models/User.dart';
+import 'package:mymood/Screens/Home/navpage/summary/summaryYear.dart';
 
 class SummaryPage extends StatefulWidget {
+
+
+  final User user;
+
+  SummaryPage({Key key, this.user}) : super(key: key);
+
   @override
   _SummaryPageState createState() => _SummaryPageState();
 }
@@ -11,7 +19,7 @@ class _SummaryPageState extends State<SummaryPage> {
     return Container(
       color: Colors.white,
       child: new Center(
-          child: new Text("this is summery page"),
+          child: SummaryYear(user: widget.user),
       ),
     );
   }

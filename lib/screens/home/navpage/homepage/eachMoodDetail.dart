@@ -20,7 +20,7 @@ class _MoodDetailState extends State<MoodDetail> {
   @override
   Widget build(BuildContext context) {
 
-    var iconThemeData = IconThemeData(color: Theme.of(context).primaryColor);
+    var iconThemeData = IconThemeData(color: Colors.black);
 
     String icon;
     Color moodColor;
@@ -28,11 +28,11 @@ class _MoodDetailState extends State<MoodDetail> {
     String title;
 
     switch (widget.mood.type) {
-      case "Depress": icon = "assets/pictures/depress.png"; moodColor = Colors.deepPurple[400]; title = "เศร้ามาก" ; break;
-      case "Unhappy": icon = "assets/pictures/sad.png"; moodColor = Colors.blue[400]; title = "รู้สึกแย่"; break;
-      case "Normal": icon = "assets/pictures/normal.png"; moodColor = Colors.blueGrey[400]; title = "ปกติ"; break;
-      case "Happy": icon = "assets/pictures/happy.png"; moodColor = Colors.amber[400]; title = "รู้สึกดี"; break;
-      case "Maniac": icon = "assets/pictures/mania.png"; moodColor = Colors.pink[400]; title = "มีความสุขมาก"; break;
+      case "Depress": icon = "assets/pictures/cDepress.png"; moodColor = Colors.deepPurple[400]; title = "เศร้ามาก" ; break;
+      case "Unhappy": icon = "assets/pictures/cUnhappy.png"; moodColor = Colors.blue[400]; title = "รู้สึกแย่"; break;
+      case "Normal": icon = "assets/pictures/cNormal.png"; moodColor = Colors.blueGrey[400]; title = "ปกติ"; break;
+      case "Happy": icon = "assets/pictures/cHappy.png"; moodColor = Colors.amber[400]; title = "รู้สึกดี"; break;
+      case "Maniac": icon = "assets/pictures/cManiac.png"; moodColor = Colors.pink[400]; title = "มีความสุขมาก"; break;
     }
 
     return Scaffold(
@@ -79,7 +79,7 @@ class _MoodDetailState extends State<MoodDetail> {
               ),
 
               Center(child: Image.asset(
-                icon,
+                icon, height: 120,
               ),),
 
                 Text(
@@ -88,7 +88,7 @@ class _MoodDetailState extends State<MoodDetail> {
                     ),
 
                 Container(
-                  margin: EdgeInsets.symmetric(vertical : 20),
+                  margin: EdgeInsets.symmetric(vertical : 20, horizontal: 30),
                   child: SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),

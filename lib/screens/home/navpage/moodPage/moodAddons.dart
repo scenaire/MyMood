@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mymood/Models/Mood.dart';
 import 'package:mymood/Models/User.dart';
+import 'package:mymood/Services/CheckMental.dart';
 import 'package:mymood/Services/MoodCloudFirestore.dart';
 
 import '../../MyHomePage.dart';
@@ -26,7 +27,7 @@ class _MoodAddonsState extends State<MoodAddons> {
   Mood mood;
   String msg;
   bool fav = false;
-
+  CheckMental m = new CheckMental();
 
   @override
   void dispose() {
@@ -54,6 +55,7 @@ class _MoodAddonsState extends State<MoodAddons> {
               child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+
             Container(
               padding: const EdgeInsets.only(
                 top: 20,
@@ -96,7 +98,7 @@ class _MoodAddonsState extends State<MoodAddons> {
                   mood = new Mood(widget.moodToSend,widget.date,msg,fav);
                   dynamic result = await mc.addMoodtoUser(mood);
                   if (result != null) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(user: widget.user)));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(user: widget.user, currentPage: 0,)));
                   }
             }))
           ],

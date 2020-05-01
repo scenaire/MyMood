@@ -4,33 +4,52 @@ class THCalendar {
 
   String getDateTimeFormatted(var newdate) {
     var formatter = new DateFormat('dd-MM-H:mm');
+
     String formatted = formatter.format(newdate);
+    String thisDateformatted = formatter.format(DateTime.now());
 
     var arr = formatted.split('-');
+    var nowArr = thisDateformatted.split('-');
 
-    if (DateTime.now().difference(newdate).inDays == 0) {
+
+    if (arr[0] == nowArr [0] ) {
       return "วันนี้ "+ arr[2];
-    } else if(DateTime.now().difference(newdate).inDays == 1) {
-      return "เมื่อวาน "+ arr[2];
     } else {
       return arr[0]+" "+monthInThai(arr[1])+" "+arr[2];
     }
   }
 
-  String changetoThaiDate (DateTime date) {
+  String changetoThaiDate(DateTime date) {
 
     String formattedDate = DateFormat('dd-MM-yyyy').format(date);
     var splitArr = formattedDate.split('-');
 
-    String timeFormatted = DateFormat('HH:mm').format(date);
+    //String timeFormatted = DateFormat('HH:mm').format(date);
 
     return splitArr[0]+" "+monthInThai(splitArr[1])+" "+toBuddhistEra(splitArr[2]);
 
   }
 
-  String timeFormatted (DateTime date) {
+  String dateandTimeFormatted(DateTime date) {
+    String formattedDate = DateFormat('dd-MM-H:mm').format(date);
+    var splitArr = formattedDate.split('-');
+
+    return splitArr[0]+" "+monthInThai(splitArr[1])+" "+splitArr[2];
+  }
+
+  String timeFormatted(DateTime date) {
     String timeFormatted = DateFormat('HH:mm').format(date);
     return timeFormatted;
+  }
+
+  String yearFormatted(DateTime date) {
+    String yearFormatted = DateFormat('yyyy').format(date);
+    return toBuddhistEra(yearFormatted);
+  }
+
+  String monthFormatted(DateTime date) {
+    String monthFormatted = DateFormat('MM').format(date);
+    return monthInThai(monthFormatted);
   }
 
 
@@ -55,7 +74,7 @@ class THCalendar {
     return monthTh;
   }
 
-  String toBuddhistEra (var year) {
+  String toBuddhistEra(var year) {
     var intYear = int.parse(year);
     intYear+=543;
     return intYear.toString();

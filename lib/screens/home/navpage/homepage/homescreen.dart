@@ -21,7 +21,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  Widget addSeperateByDate (List<Mood> mList) {
+  Future<List<Mood>> moodData;
+
+  @override
+  void initState() {
+    super.initState();
+    moodData = retriveData();
+  }
+
+  Widget addSeperateByDate(List<Mood> mList) {
     THCalendar thCalendar = new THCalendar();
     List<Widget> list = new List<Widget>();
 
@@ -57,28 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   }
 
-  Widget getMoodCardWidget (List<Mood> mList) {
-    List<Widget> list = new List<Widget>();
-
-    int end = mList.length;
-
-    
-    for(var i = 0; i < end; i++) {
-
-      list.add(
-        new MoodCard(
-          mood: mList[i]
-        )
-      );
-    }
-
-    return new Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: list
-    );
-  }
-
   Future<List<Mood>> retriveData() async {
     MoodCloudFirestore mc = MoodCloudFirestore(uid: widget.user.uid);
     return await mc.retriveMoodData();
@@ -112,11 +98,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: MediaQuery.of(context).size.width,
                 height: MediaQuery.of(context).size.height - 130,
                 child: FutureBuilder(
-                  future: retriveData(),
+                  future: moodData,
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (!snapshot.hasData) {
                       return Center(
-                        child: JumpingText("Loading...")
+                        child: JumpingText("กำลังโหลด...")
                       );
                     } else if (snapshot.data.length == 0) {
                       return Center(
@@ -186,11 +172,11 @@ class MoodCard extends StatelessWidget {
     String time = thCal.timeFormatted(mood.time);
 
     switch (mood.type) {
-      case "Depress": icon = "assets/pictures/depress.png"; moodColor = Colors.deepPurple[200]; title = "เศร้ามาก" ; break;
-      case "Unhappy": icon = "assets/pictures/sad.png"; moodColor = Colors.blue[200]; title = "รู้สึกแย่"; break;
-      case "Normal": icon = "assets/pictures/normal.png"; moodColor = Colors.blueGrey[100]; title = "ปกติ"; break;
-      case "Happy": icon = "assets/pictures/happy.png"; moodColor = Colors.amber[400]; title = "รู้สึกดี"; break;
-      case "Maniac": icon = "assets/pictures/mania.png"; moodColor = Colors.pink[100]; title = "มีความสุขมาก"; break;
+      case "Depress": icon = "assets/pictures/cDepress.png"; moodColor = Colors.deepPurple[200]; title = "เศร้ามาก" ; break;
+      case "Unhappy": icon = "assets/pictures/cUnhappy.png"; moodColor = Colors.blue[200]; title = "รู้สึกแย่"; break;
+      case "Normal": icon = "assets/pictures/cNormal.png"; moodColor = Colors.blueGrey[100]; title = "ปกติ"; break;
+      case "Happy": icon = "assets/pictures/cHappy.png"; moodColor = Colors.amber[400]; title = "รู้สึกดี"; break;
+      case "Maniac": icon = "assets/pictures/cManiac.png"; moodColor = Colors.pink[100]; title = "มีความสุขมาก"; break;
     }
 
 

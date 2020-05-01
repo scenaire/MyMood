@@ -13,14 +13,7 @@ class MoodCloudFirestore {
   // ADD 
 
     Future addMoodtoUser(Mood mood) async {
-    String moodInput = "";
-    // switch (mood.type) {
-    //   case MoodEnums.Maniac : moodInput = "Maniac"; break;
-    //   case MoodEnums.Happy : moodInput = "Happy"; break;
-    //   case MoodEnums.Unhappy : moodInput = "Unhappy"; break;
-    //   case MoodEnums.Depress : moodInput = "Depress"; break;
-    //   default : moodInput = "Nornal";
-    // }
+    
     try {
       await moodCollection
       .document(uid)
@@ -42,8 +35,6 @@ class MoodCloudFirestore {
   //GET
 
   Future<List<Mood>> retriveMoodData() async {
-
-    MoodEnums _moodtype;
 
     QuerySnapshot snapshot = await moodCollection
     .document(uid)

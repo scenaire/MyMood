@@ -1,12 +1,3 @@
-import 'package:mymood/Services/UserCloudFirestore.dart';
-
-enum MoodEnums {
-  Depress,
-  Unhappy,
-  Normal,
-  Happy,
-  Maniac
-}
 
 class Mood {
 
@@ -14,8 +5,6 @@ class Mood {
   DateTime time;
   bool fav = false;
   String message = '';
-
-  UserCloudFirestore uc = UserCloudFirestore();
 
   Mood(String type, DateTime time, String message, bool fav) {
     this.type = type;

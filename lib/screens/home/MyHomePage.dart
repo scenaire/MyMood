@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Authenticate/Firstpage.dart';
+import 'package:mymood/Screens/Home/quizpage/mainQuizPage.dart';
 import 'package:mymood/Services/Auth.dart';
 import 'package:mymood/screens/home/my_mood_icon_icons.dart';
 
@@ -18,8 +19,9 @@ class MyHomePage extends StatefulWidget {
   
   
   final User user;
+  final int currentPage;
 
-  MyHomePage({Key key, this.user}) : super(key: key);
+  MyHomePage({Key key, this.user, this.currentPage}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -35,7 +37,12 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    currentIndex = 0;
+    if (widget.currentPage != null) {
+      currentIndex = widget.currentPage;
+    } else {
+      currentIndex = 0;
+    }
+    
   }
 
   //change page function
@@ -52,8 +59,8 @@ class _MyHomePageState extends State<MyHomePage> {
     //page setup
   final pageOptions = [
     HomeScreen(user: widget.user,),
-    SummaryPage(),
-    SleepPage(),
+    SummaryPage(user: widget.user,),
+    SleepPage(user: widget.user,),
     ArticlePage(),
   ];
     
@@ -83,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: ListView(padding: EdgeInsets.zero, children: <Widget>[
             DrawerHeader(
               child: Text(
-                      "สาลี่",
+                      "",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 25, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
             ),
@@ -99,7 +106,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       "ทำแบบประเมินสุขภาพจิต",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => QuizPage(user: widget.user)));
+              },
             ),
             ListTile(
               title: Text(
