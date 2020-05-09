@@ -58,11 +58,11 @@ class _MoodHomeState extends State<MoodHome> {
             children: <Widget>[
               Text(
                 'สวัสดี',
-                style: Theme.of(context).textTheme.headline,
+                style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 24.0, color: const Color.fromARGB(255, 40, 40, 40)),
               ),
               Text(
                 'วันนี้คุณรู้สึกอย่างไร',
-                style: Theme.of(context).textTheme.headline,
+                style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 24.0, color: const Color.fromARGB(255, 40, 40, 40)),
               ),
               FlatButton(
                 color: Colors.transparent,

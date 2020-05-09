@@ -100,7 +100,8 @@ class _SleepPageState extends State<SleepPage> {
                     minWidth: 100,
                     height: 50,
                     child: RaisedButton(
-                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(18.0)),
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
+                      elevation: 0.0,
                       color: Theme.of(context).primaryColor,
                       onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AddSleepPage(user: widget.user)));},
                       child: Text(

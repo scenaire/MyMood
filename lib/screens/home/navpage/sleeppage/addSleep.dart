@@ -171,7 +171,10 @@ class _AddSleepPageState extends State<AddSleepPage> {
 
               Container(
                 margin: EdgeInsets.only(top: 10),
-                child: RaisedButton(
+                child: ButtonTheme(
+                  minWidth: 150,
+                  height: 50,
+                  child: RaisedButton(
                 onPressed: () async {
                   if (endSleep.isAfter(startSleep) && endSleep.isBefore(DateTime.now()) && startSleep.isBefore(DateTime.now())) {
                     SleepCloudFireStore sc = SleepCloudFireStore(uid: widget.user.uid);
@@ -190,14 +193,17 @@ class _AddSleepPageState extends State<AddSleepPage> {
                   }
                 },
                 textColor: Theme.of(context).primaryColor,
+                elevation: 0.0,
+                color: Theme.of(context).primaryColor,
                 //borderSide: BorderSide(color: Theme.of(context).primaryColor, width: 3.0, style: BorderStyle.solid),
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 child: Text("บันทึก", style: TextStyle(
                                     fontFamily: 'Prompt',
                                     fontSize: 22,
-                                    color: Theme.of(context).primaryColor,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w600),),
               ),
+                )
               ),
 
 

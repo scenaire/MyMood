@@ -27,7 +27,7 @@ class FirstPage extends StatelessWidget {
                 ),
 
                 Image(
-                  image: AssetImage('assets/pictures/welcome.png')
+                  image: AssetImage('assets/pictures/welcome2.png')
                   ),
 
                 Container(

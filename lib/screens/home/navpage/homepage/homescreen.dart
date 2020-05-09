@@ -22,12 +22,15 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   Future<List<Mood>> moodData;
+  bool showTriggerSuicide = false; 
+  bool showTriggerNegative = false;
 
   @override
   void initState() {
     super.initState();
     moodData = retriveData();
   }
+  
 
   Widget addSeperateByDate(List<Mood> mList) {
     THCalendar thCalendar = new THCalendar();
@@ -110,6 +113,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       );
                     }
                     else {
+
+                      
+
                       return SingleChildScrollView(
                         child: addSeperateByDate(snapshot.data)
                       );
@@ -256,6 +262,7 @@ class MoodCard extends StatelessWidget {
     ),
       ),
       onTap: () {
+        
         Navigator.push(context, MaterialPageRoute(builder: (context) => MoodDetail(mood: mood,)));
       },
     );

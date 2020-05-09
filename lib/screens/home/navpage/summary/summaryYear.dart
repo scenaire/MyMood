@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymood/Models/Mood.dart';
 import 'package:mymood/Models/User.dart';
+import 'package:mymood/Screens/Home/navpage/homepage/eachMoodDetail.dart';
 import 'package:mymood/Services/MoodCloudFirestore.dart';
 import 'package:mymood/Services/thCalendar.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -11,15 +12,13 @@ class SummaryYear extends StatelessWidget {
 
   SummaryYear({Key key, this.user}) : super(key: key);
 
+  Future<List<Mood>> retriveData() async {
+      MoodCloudFirestore mc = MoodCloudFirestore(uid: user.uid);
+      return await mc.retriveMoodData();
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
-    Future<List<Mood>> retriveData() async {
-    MoodCloudFirestore mc = MoodCloudFirestore(uid: user.uid);
-    return await mc.retriveMoodData();
-    }
-
 
     return Container(
 
@@ -78,7 +77,14 @@ class MoodIcon extends StatelessWidget {
       case "Maniac":  moodIcon = "assets/pictures/cManiac.png"; break;
     }
 
-    return Image.asset(moodIcon);
+    
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MoodDetail(mood: mood,)));
+      },
+      child: Image.asset(moodIcon)
+    );
   }
 }
 
@@ -92,6 +98,84 @@ class MonthCalendar extends StatelessWidget {
     Key key,
     this.moodList
   }) : super(key: key);
+
+  Widget getMoodRow(List<Mood> mm) {
+
+    List<Widget> list = new List<Widget>();
+
+    for (int i=0; i<mm.length; i++) {
+      list.add(new MoodIcon(mood: mm[i],));
+    }
+    
+    return new Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: list,
+    );
+
+  }
+
+  Widget getMoodBalloon(List<Mood> lm) {
+
+    List<Widget> list = new List<Widget>();
+    List<Mood> temp = new List<Mood>();
+
+    int lastRow = (lm.length / 6).floor();
+    int index = 0;
+
+    for (int i=0; i<=lastRow; i++) {
+      if (lastRow == i) {
+        for (int j=0; j<(lm.length%6); j++) {
+          temp.add(lm[index]);
+          index++;
+        }
+        list.add(getMoodRow(temp));
+      }
+      else if (lastRow != i) {
+        for (int j=0; j<6; j++) {
+          temp.add(lm[index]);
+          index++;
+        }
+        list.add(getMoodRow(temp));
+        temp.clear();
+      }
+    }
+
+    // for (int i=0; i<lm.length; i++) {
+
+    //   if (i%6 == 0) {
+    //     count++;
+    //   }
+
+    //   if (count == lastRow) {
+    //     if (i != lm.length-1) {
+    //       temp.add(lm[i]);
+    //     } else {
+    //       temp.add(lm[i]);
+    //       list.add(getMoodRow(temp));
+    //       temp.clear();
+    //     }
+    //   } else {
+    //       if (i==0) {
+    //         temp.add(lm[i]);
+    //       } else if (i%6 != 0) {
+    //         temp.add(lm[i]);
+    //       } else {
+    //         list.add(getMoodRow(temp));
+    //         temp.clear();
+    //         temp.add(lm[i]);
+    //       }
+    //   }
+      
+    // }
+    
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: list
+    );
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,48 +213,7 @@ class MonthCalendar extends StatelessWidget {
 
               width: MediaQuery.of(context).size.width,
 
-              child: Column(
-
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-
-            children: <Widget> [
-
-              Row(
-
-                mainAxisAlignment: MainAxisAlignment.center,
-
-            children: <Widget> [
-
-             MoodIcon(mood: Mood("Depress", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Happy", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Maniac", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Unhappy", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Normal", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Maniac", DateTime.now(), "", false),),
-
-
-            ]
-          ),
-
-          Row(
-
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget> [
-
-             MoodIcon(mood: Mood("Depress", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Happy", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Maniac", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Unhappy", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Normal", DateTime.now(), "", false),),
-             MoodIcon(mood: Mood("Maniac", DateTime.now(), "", false),),
-
-
-            ]
-          ),
-
-            ]
-          ),
+              child: getMoodBalloon(new List.from(moodList.reversed)),
 
             )
           )

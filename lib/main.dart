@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
 
         textTheme: TextTheme(
-          headline: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 24.0, color: const Color.fromARGB(255, 40, 40, 40)),
+          //headline: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 24.0, color: const Color.fromARGB(255, 40, 40, 40)),
           body1: TextStyle(fontFamily: 'prompt', fontSize:16.0, color: Colors.grey[800]),
         )
       ),

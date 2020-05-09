@@ -4,6 +4,7 @@ import 'package:mymood/Models/Mood.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Services/CheckMental.dart';
 import 'package:mymood/Services/MoodCloudFirestore.dart';
+import 'package:mymood/Widgets/loadingPage.dart';
 
 import '../../MyHomePage.dart';
 
@@ -28,6 +29,7 @@ class _MoodAddonsState extends State<MoodAddons> {
   String msg;
   bool fav = false;
   CheckMental m = new CheckMental();
+  bool loading = false;
 
   @override
   void dispose() {
@@ -40,7 +42,9 @@ class _MoodAddonsState extends State<MoodAddons> {
     var iconThemeData = IconThemeData(color: Theme.of(context).primaryColor);
     
 
-    return Scaffold(
+    return loading ? 
+    Loading() : 
+    Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         iconTheme: iconThemeData,
@@ -63,7 +67,7 @@ class _MoodAddonsState extends State<MoodAddons> {
               ),
               child: Text(
                 'คุณรู้สึกอะไรอยู่',
-                style: Theme.of(context).textTheme.headline,
+                style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 24.0, color: const Color.fromARGB(255, 40, 40, 40)),
               ),
             ),
             Container(
@@ -95,10 +99,21 @@ class _MoodAddonsState extends State<MoodAddons> {
                 onPressed: () async { 
                   MoodCloudFirestore mc = MoodCloudFirestore(uid: widget.user.uid);
                   msg = messageController.text;
-                  mood = new Mood(widget.moodToSend,widget.date,msg,fav);
+                  mood = new Mood(type: widget.moodToSend,time: widget.date, message: msg, fav: fav);
                   dynamic result = await mc.addMoodtoUser(mood);
                   if (result != null) {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => MyHomePage(user: widget.user, currentPage: 0,)));
+                    setState(() {
+                        loading = true;
+                    });
+                    Future.delayed(const Duration(seconds: 10),
+                      () {
+                        setState(() {
+                          loading = false;
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: widget.user, currentPage: 0,)));
+                        });
+                      }
+                    );
+                    
                   }
             }))
           ],

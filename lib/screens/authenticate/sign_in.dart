@@ -46,7 +46,7 @@ class _SignInState extends State<SignIn> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Image(image: AssetImage('assets/pictures/signin.png')),
+                      Image(image: AssetImage('assets/pictures/signin2.png')),
                       Container(
                           margin: EdgeInsets.only(bottom: 40),
                           padding: EdgeInsets.symmetric(horizontal: 30),

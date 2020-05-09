@@ -23,6 +23,8 @@ class MoodCloudFirestore {
         'time' : mood.time,
         'fav' : mood.fav,
         'message' : mood.message,
+        'negative' : null,
+        'suicide' : null,
       });
       
       return true;
@@ -45,10 +47,20 @@ class MoodCloudFirestore {
 
 
     snapshot.documents.forEach((document) {
-      _moodList.add(new Mood(document['mood'], document['time'].toDate(), document['message'], document['fav']));
-    });
+      _moodList.add(
+        new Mood(
+          type: document['mood'],
+          time: document['time'].toDate(), 
+          message: document['message'], 
+          fav: document['fav'], 
+          negative: document['negative'], 
+          suicidal: document['suicide']
+        ));
 
+    });
+    
     return sortListByDateTime(_moodList);
+    
 
   }
 

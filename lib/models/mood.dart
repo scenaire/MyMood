@@ -3,15 +3,12 @@ class Mood {
 
   String type;
   DateTime time;
-  bool fav = false;
-  String message = '';
+  bool fav;
+  String message;
+  String negative;
+  String suicidal;
 
-  Mood(String type, DateTime time, String message, bool fav) {
-    this.type = type;
-    this.time = time;
-    this.message = message;
-    this.fav = fav;
-  }
+  Mood ({this.type, this.time, this.fav, this.message, this.negative, this.suicidal });
 
   get getMessage {
     return this.message;
@@ -20,6 +17,7 @@ class Mood {
   get getType {
     return this.type;
   }
+
 
   
   

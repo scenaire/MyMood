@@ -44,7 +44,7 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Image(image: AssetImage('assets/pictures/register.jpg')),
+                Image(image: AssetImage('assets/pictures/register2.png')),
                 Container(
                     margin: EdgeInsets.only(bottom: 40),
                     padding: EdgeInsets.symmetric(horizontal: 30),

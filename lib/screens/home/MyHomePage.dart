@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Authenticate/Firstpage.dart';
-import 'package:mymood/Screens/Home/quizpage/mainQuizPage.dart';
+import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
 import 'package:mymood/Services/Auth.dart';
 import 'package:mymood/screens/home/my_mood_icon_icons.dart';
 
@@ -108,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => QuizPage(user: widget.user)));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage(user: widget.user)));
               },
             ),
             ListTile(
