@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Authenticate/Firstpage.dart';
+import 'package:mymood/Screens/Home/navpage/others/hotline.dart';
 import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
 import 'package:mymood/Services/Auth.dart';
 import 'package:mymood/screens/home/my_mood_icon_icons.dart';
@@ -62,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
     SummaryPage(user: widget.user,),
     SleepPage(user: widget.user,),
     ArticlePage(),
+    HotlinePage()
   ];
     
 
@@ -111,19 +113,29 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage(user: widget.user)));
               },
             ),
-            ListTile(
-              title: Text(
-                      "ประวัติการทำแบบประเมินสุขภาพจิต",
-                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
-                    ),
-              onTap: () {},
-            ),
+            // ListTile(
+            //   title: Text(
+            //           "ประวัติการทำแบบประเมินสุขภาพจิต",
+            //           style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+            //         ),
+            //   onTap: () {},
+            // ),
             ListTile(
               title: Text(
                       "ค้นหาคลีนิคสุขภาพจิตใกล้คุณ",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
               onTap: () {},
+            ),
+            ListTile(
+              title: Text(
+                      "Hot line สุขภาพจิต",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HotlinePage()));
+              },
             ),
             ListTile(
               title: Text(

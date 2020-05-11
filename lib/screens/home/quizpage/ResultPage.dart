@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Home/MyHomePage.dart';
+import 'package:mymood/Screens/Home/quizpage/EightQPage.dart';
 import 'package:mymood/Screens/Home/quizpage/NineQPage.dart';
 
 class QuizResult extends StatelessWidget {
@@ -111,9 +112,92 @@ class QuizResult extends StatelessWidget {
           elevation: 0.0,
           child: Text('ทำแบบประเมิน', style: TextStyle(fontFamily: 'prompt',fontSize: 20, color: Colors.black)),
           onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EightQPage(user: user)));
+          }
+        ),));
+    }
+
+    return list;
+  }
+
+  List<Widget> eightQResult() {
+    List<Widget> list = List<Widget>();
+
+    if (result == 0) {
+      list.add(new Text('คุณไม่มีคุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+      list.add(new Text('โดยมีคะแนน $result คะแนน'));
+      list.add(new Container(child: Image.asset(happyPic), margin: EdgeInsets.symmetric(vertical: 20.0)));
+      list.add(new Text('อย่างไรก็ตาม'));
+      list.add(new Text('คุณสามารถกลับมาทำแบบประเมินได้ทุกเมื่อ'));
+      list.add(new Padding(padding: EdgeInsets.only(top: 50)));
+      list.add(new ButtonTheme(
+        minWidth: 150,
+        height: 50,
+        child: RaisedButton(
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(6.0)),
+          color: Colors.yellow[400],
+          elevation: 0.0,
+          child: Text('กลับหน้าหลัก', style: TextStyle(fontFamily: 'prompt',fontSize: 20, color: Colors.black)),
+          onPressed: () {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: user)));
           }
         ),));
+    } else {
+      if (result >= 1 && result < 9) {
+        list.add(new Text('คุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+        list.add(new Text('ระดับน้อย', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+      } else if (result >= 9 && result < 17) {
+        list.add(new Text('คุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+        list.add(new Text('ระดับปานกลาง', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+      } else if (result >= 17) {
+        list.add(new Text('คุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+        list.add(new Text('ระดับรุนแรง', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+      }
+      list.add(new Text('โดยมีคะแนน $result คะแนน'));
+      list.add(new Container(child: Image.asset(depressPic), margin: EdgeInsets.symmetric(vertical: 20.0)));
+      list.add(new Text('เราอยากช่วยเหลือคุณ'));
+      list.add(new Text('เราขอแนะนำให้คุณพบแพทย์ หรือ'));
+      list.add(new Text('ใช้บริการฮอตไลน์สำหรับผู้ป่วยซึมเศร้า'));
+      list.add(new Padding(padding: EdgeInsets.only(top: 20)));
+      list.add(new ButtonTheme(
+        minWidth: 170,
+        height: 40,
+        child: RaisedButton(
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(6.0)),
+          color: Colors.deepPurple[200],
+          elevation: 0.0,
+          child: Text('ค้นหาคลินิกใกล้เคียง', style: TextStyle(fontFamily: 'prompt',fontSize: 16, color: Colors.black)),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: user, currentPage: 0,)));
+          }
+        ),));
+      list.add(Padding(padding: EdgeInsets.symmetric(vertical: 2),));
+      list.add(new ButtonTheme(
+        minWidth: 170,
+        height: 40,
+        child: RaisedButton(
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(6.0)),
+          color: Colors.deepPurple[200],
+          elevation: 0.0,
+          child: Text('ฮอตไลน์สุขภาพจิต', style: TextStyle(fontFamily: 'prompt',fontSize: 16, color: Colors.black)),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: user, currentPage: 0,)));
+          }
+        ),));
+      list.add(Padding(padding: EdgeInsets.symmetric(vertical: 2),));
+      list.add(new ButtonTheme(
+        minWidth: 170,
+        height: 40,
+        child: RaisedButton(
+          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(6.0)),
+          color: Colors.black,
+          elevation: 0.0,
+          child: Text('กลับหน้าหลัก', style: TextStyle(fontFamily: 'prompt',fontSize: 16, color: Colors.white)),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: user,)));
+          }
+        ),));
+      
     }
 
     return list;
@@ -127,6 +211,8 @@ class QuizResult extends StatelessWidget {
       list = list+twoQResult();
     } else if (quiz == 9) {
       list = list+ nineQResult();
+    } else if (quiz == 8) {
+      list = list + eightQResult();
     }
 
     return list;
