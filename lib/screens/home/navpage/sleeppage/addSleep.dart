@@ -48,7 +48,13 @@ class _AddSleepPageState extends State<AddSleepPage> {
 
               // เวลานอน
 
-              Container(
+              GestureDetector(
+
+                onTap: () {
+                  openDatePickerStart();
+                },
+
+                child: Container(
 
                 width: MediaQuery.of(context).size.width - 30,
 
@@ -101,10 +107,15 @@ class _AddSleepPageState extends State<AddSleepPage> {
                 ),
 
               ),
+              ),
 
               //เวลาตื่น
 
-              Container(
+              GestureDetector(
+
+                onTap: () {openDatePickerEnd();},
+
+                child: Container(
 
                 width: MediaQuery.of(context).size.width - 30,
 
@@ -156,6 +167,7 @@ class _AddSleepPageState extends State<AddSleepPage> {
 
                 ),
 
+              ),
               ),
 
               //Concern Text

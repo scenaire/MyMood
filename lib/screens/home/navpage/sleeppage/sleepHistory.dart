@@ -64,7 +64,7 @@ class _SleepHistoryState extends State<SleepHistory> {
   Widget build(BuildContext context) {
     return Container(
 
-      color: Color(0xFFFEFEFE),
+      color: Color(0xFFF2F2F2),
       child: new SingleChildScrollView(
         child: Column (
           
@@ -109,8 +109,8 @@ class SleepCard extends StatelessWidget {
       margin: EdgeInsets.all(8.0),
       height: 150,
       child: Card (
-        shape: RoundedRectangleBorder(side: BorderSide(color: Colors.teal[100], width: 2.0), borderRadius: BorderRadius.all(Radius.circular(20.0))),
-        elevation: 8,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0))),
+        elevation: 0,
         color: Colors.white,
         child: Container(
           child: Column(

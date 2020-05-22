@@ -27,13 +27,19 @@ class _MoodDetailState extends State<MoodDetail> {
     THCalendar thCal = new THCalendar();
     String title;
 
+    const Color unHappyColor = Color(0xFFADD4D9);
+    const Color depressColor = Color(0xFF85A2A6);
+    const Color normalColor = Color(0xFFf5d791);
+    const Color happyColor = Color(0xFFF29580);
+    const Color maniacColor = Color(0xFFF2695C);
+
 
     switch (widget.mood.type) {
-      case "Depress": icon = "assets/pictures/cDepress.png"; moodColor = Colors.deepPurple[400]; title = "เศร้ามาก" ; break;
-      case "Unhappy": icon = "assets/pictures/cUnhappy.png"; moodColor = Colors.blue[400]; title = "รู้สึกแย่"; break;
-      case "Normal": icon = "assets/pictures/cNormal.png"; moodColor = Colors.blueGrey[400]; title = "ปกติ"; break;
-      case "Happy": icon = "assets/pictures/cHappy.png"; moodColor = Colors.amber[400]; title = "รู้สึกดี"; break;
-      case "Maniac": icon = "assets/pictures/cManiac.png"; moodColor = Colors.pink[400]; title = "มีความสุขมาก"; break;
+      case "Depress": icon = "assets/pictures/cDepress2.png"; moodColor = depressColor; title = "เศร้ามาก" ; break;
+      case "Unhappy": icon = "assets/pictures/cUnhappy2.png"; moodColor = unHappyColor; title = "รู้สึกแย่"; break;
+      case "Normal": icon = "assets/pictures/cNormal2.png"; moodColor = normalColor; title = "ปกติ"; break;
+      case "Happy": icon = "assets/pictures/cHappy2.png"; moodColor = happyColor; title = "รู้สึกดี"; break;
+      case "Maniac": icon = "assets/pictures/cManiac2.png"; moodColor = maniacColor; title = "มีความสุขมาก"; break;
     }
 
     List<TextSpan> getTextSpan() {

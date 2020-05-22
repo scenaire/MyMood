@@ -3,6 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:mymood/Models/Mood.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Home/navpage/homepage/eachMoodDetail.dart';
+import 'package:mymood/Screens/Home/navpage/others/hotline.dart';
+import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
 import 'package:mymood/Services/MoodCloudFirestore.dart';
 import 'package:mymood/Services/thCalendar.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -30,6 +32,82 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     moodData = retriveData();
   }
+
+  Widget notificationDepress() {
+
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              border: Border.all(width: 3, color: Color(0xFFCAE7E7),),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('เราอยากช่วยเหลือคุณ', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 20, color: Colors.black), textAlign: TextAlign.center,),
+                Container(
+                  margin: EdgeInsets.all(8.0), 
+                  child: Image.asset('assets/pictures/nursing.png'),
+                ),
+                Text('เราตรวจพบว่าคุณมีความเสี่ยงของโรคซึมเศร้า', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('จากข้อความที่คุณบันทึกเข้ามาล่าสุด', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('เราขอแนะนำให้คุณทำแบบคัดกรองเพื่อประเมินความเสี่ยง', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Padding(padding: EdgeInsets.only(bottom: 8.0)),
+                ButtonTheme(
+                  minWidth: 150,
+                  child: FlatButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage(user: widget.user))); }, 
+                    child: Text('ทำแบบประเมิน', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
+                )
+              ]
+            )
+          );
+  }
+
+  Widget notificationSuicidal() {
+
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              // border: Border.all(width: 3, color: const Color.fromARGB(255, 251, 215, 219)),
+               borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('เราอยากช่วยเหลือคุณ', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 20, color: Colors.black), textAlign: TextAlign.center,),
+                Container(
+                  margin: EdgeInsets.all(8.0), 
+                  child: Image.asset('assets/pictures/nursing.png'),
+                ),
+                Text('เราตรวจพบว่าคุณมีความเสี่ยงในการทำร้ายตนเอง', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('จากข้อความที่คุณบันทึกเข้ามาล่าสุด', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('เราขอแนะนำให้คุณพบจิตแพทย์ที่ใกล้ที่สุด', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('หรือโทรปรึกษาฮอตไลน์สุขภาพจิตอย่างเร่งด่วน', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Padding(padding: EdgeInsets.only(bottom: 8.0)),
+                ButtonTheme(
+                  minWidth: 150,
+                  child: FlatButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => HotlinePage())); }, 
+                    child: Text('Hotline', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
+                ),
+                ButtonTheme(
+                  minWidth: 150,
+                  child: FlatButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage(user: widget.user))); }, 
+                    child: Text('ค้นหาคลินิกจิตเวช', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
+                )
+              ]
+            )
+          );
+  }
   
 
   Widget addSeperateByDate(List<Mood> mList) {
@@ -38,6 +116,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
     DateTime currentTime = mList[0].time;
     int end = mList.length;
+
+    if(mList[0].suicidal.trim() != '') {
+      list.add(notificationSuicidal());
+    } else if (mList[0].negative.trim() != '') {
+      list.add(notificationDepress());
+    }
+
+    
 
     list.add(new DateCard(date: thCalendar.changetoThaiDate(currentTime)));
 
@@ -78,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
 
     return Container(
-      color: Color(0xFFFEFEFE),
+      color: Color(0xFFF8F8F8),
       child:  new SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -170,6 +256,18 @@ class MoodCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    //Colors.deepPurple[200]
+    //Colors.blue[200]
+    //Colors.blueGrey[100]
+    //Colors.amber[400]
+    //Colors.pink[100]
+
+    const Color unHappyColor = Color(0xFFADD4D9);
+    const Color depressColor = Color(0xFF85A2A6);
+    const Color normalColor = Color(0xFFf5d791);
+    const Color happyColor = Color(0xFFF29580);
+    const Color maniacColor = Color(0xFFF2695C);
+
     String icon;
     Color moodColor;
     THCalendar thCal = new THCalendar();
@@ -178,11 +276,11 @@ class MoodCard extends StatelessWidget {
     String time = thCal.timeFormatted(mood.time);
 
     switch (mood.type) {
-      case "Depress": icon = "assets/pictures/cDepress.png"; moodColor = Colors.deepPurple[200]; title = "เศร้ามาก" ; break;
-      case "Unhappy": icon = "assets/pictures/cUnhappy.png"; moodColor = Colors.blue[200]; title = "รู้สึกแย่"; break;
-      case "Normal": icon = "assets/pictures/cNormal.png"; moodColor = Colors.blueGrey[100]; title = "ปกติ"; break;
-      case "Happy": icon = "assets/pictures/cHappy.png"; moodColor = Colors.amber[400]; title = "รู้สึกดี"; break;
-      case "Maniac": icon = "assets/pictures/cManiac.png"; moodColor = Colors.pink[100]; title = "มีความสุขมาก"; break;
+      case "Depress": icon = "assets/pictures/cDepress2.png"; moodColor = depressColor; title = "เศร้ามาก" ; break;
+      case "Unhappy": icon = "assets/pictures/cUnhappy2.png"; moodColor = unHappyColor; title = "รู้สึกแย่"; break;
+      case "Normal": icon = "assets/pictures/cNormal2.png"; moodColor = normalColor; title = "ปกติ"; break;
+      case "Happy": icon = "assets/pictures/cHappy2.png"; moodColor = happyColor; title = "รู้สึกดี"; break;
+      case "Maniac": icon = "assets/pictures/cManiac2.png"; moodColor = maniacColor; title = "มีความสุขมาก"; break;
     }
 
 
@@ -201,10 +299,10 @@ class MoodCard extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Colors.white,
-                border: Border.all(
-                  width: 3,
-                  color: moodColor,
-                ),
+                // border: Border.all(
+                //   width: 3,
+                //   color: moodColor,
+                // ),
                 boxShadow: [
                   BoxShadow(
                     offset: Offset(0,8),

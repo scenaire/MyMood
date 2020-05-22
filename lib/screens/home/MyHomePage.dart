@@ -105,6 +105,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Text(
+                      "แนะนำการใช้งาน",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text(
                       "ทำแบบประเมินสุขภาพจิต",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
@@ -129,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             ListTile(
               title: Text(
-                      "Hot line สุขภาพจิต",
+                      "บริการที่ปรึกษาทางใจ",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
               onTap: () {

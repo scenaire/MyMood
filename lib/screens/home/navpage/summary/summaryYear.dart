@@ -70,11 +70,11 @@ class MoodIcon extends StatelessWidget {
     String moodIcon;
 
     switch (mood.type) {
-      case "Depress": moodIcon = "assets/pictures/cDepress.png"; break;
-      case "Unhappy":  moodIcon = "assets/pictures/cUnhappy.png";  break;
-      case "Normal":  moodIcon = "assets/pictures/cNormal.png";  break;
-      case "Happy":  moodIcon = "assets/pictures/cHappy.png";  break;
-      case "Maniac":  moodIcon = "assets/pictures/cManiac.png"; break;
+      case "Depress": moodIcon = "assets/pictures/cDepress2.png"; break;
+      case "Unhappy":  moodIcon = "assets/pictures/cUnhappy2.png";  break;
+      case "Normal":  moodIcon = "assets/pictures/cNormal2.png";  break;
+      case "Happy":  moodIcon = "assets/pictures/cHappy2.png";  break;
+      case "Maniac":  moodIcon = "assets/pictures/cManiac2.png"; break;
     }
 
     

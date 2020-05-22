@@ -40,61 +40,62 @@ class _SleepPageState extends State<SleepPage> {
       child: new Center(
           child: Column(
             children: <Widget> [
-              Row(
-                children: <Widget> [
-                  ButtonTheme(
-                    minWidth: MediaQuery.of(context).size.width / 2,
-                    height: 50.0,
-                    child: FlatButton(
-                      onPressed: () {
-                        setState(() {
-                          pressedSummary = true;
-                          pressedHistory = false;
-                          currentIndex = 0;
-                        });
-                      },
-                      color: pressedSummary? clickedBG : subBG,
-                      child: Text(
-                        "ผลสรุป",
-                        style: TextStyle(fontFamily: 'Prompt', fontSize: 20, color: pressedSummary? clickedText : subText, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
+              // Row(
+              //   children: <Widget> [
+              //     ButtonTheme(
+              //       minWidth: MediaQuery.of(context).size.width / 2,
+              //       height: 50.0,
+              //       child: FlatButton(
+              //         onPressed: () {
+              //           setState(() {
+              //             pressedSummary = true;
+              //             pressedHistory = false;
+              //             currentIndex = 0;
+              //           });
+              //         },
+              //         color: pressedSummary? clickedBG : subBG,
+              //         child: Text(
+              //           "ผลสรุป",
+              //           style: TextStyle(fontFamily: 'Prompt', fontSize: 20, color: pressedSummary? clickedText : subText, fontWeight: FontWeight.w600),
+              //         ),
+              //       ),
+              //     ),
 
-                  ButtonTheme(
-                    minWidth: MediaQuery.of(context).size.width / 2,
-                    height: 50.0,
-                    child: FlatButton(
-                      onPressed: () {
-                        setState(() {
-                          pressedHistory = true;
-                          pressedSummary = false;
-                          currentIndex = 1;
-                        });
-                      },
-                      color: pressedHistory? clickedBG : subBG,
-                      child: Text(
-                        "ประวัติ",
-                        style: TextStyle(fontFamily: 'Prompt', fontSize: 20, color: pressedHistory? clickedText: subText, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
+              //     ButtonTheme(
+              //       minWidth: MediaQuery.of(context).size.width / 2,
+              //       height: 50.0,
+              //       child: FlatButton(
+              //         onPressed: () {
+              //           setState(() {
+              //             pressedHistory = true;
+              //             pressedSummary = false;
+              //             currentIndex = 1;
+              //           });
+              //         },
+              //         color: pressedHistory? clickedBG : subBG,
+              //         child: Text(
+              //           "ประวัติ",
+              //           style: TextStyle(fontFamily: 'Prompt', fontSize: 20, color: pressedHistory? clickedText: subText, fontWeight: FontWeight.w600),
+              //         ),
+              //       ),
+              //     ),
 
                 
-                ]
-              ),
+              //   ]
+              // ),
 
               Container(
-                height: MediaQuery.of(context).size.height - 270,
+                height: MediaQuery.of(context).size.height - 230,
                 width: MediaQuery.of(context).size.width,
-                color: Colors.white,
-                child: pageOptions[currentIndex],
+                color: Color(0xFFF2F2F2),
+                child: SleepHistory(user: widget.user),
               ),
 
              
 
               Container(
-                padding: EdgeInsets.only(top: 20.0),
+                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                color: Color(0xFFF2F2F2),
                 child: Center(
                   child: ButtonTheme(
                     minWidth: 100,
