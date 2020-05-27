@@ -23,7 +23,7 @@ class _MoodHomeState extends State<MoodHome> {
   final THCalendar _thCalendar = THCalendar();
 
   var sliderValue = 2.5;
-  var moodColor = Colors.grey;
+  Color moodColor = Color(0xFFf5d791);
   String moodString = "เฉยๆ";
   String moodE = "Normal";
 
@@ -35,12 +35,19 @@ class _MoodHomeState extends State<MoodHome> {
     "มีความสุขมาก"
   ];
 
-    AssetImage moodImage = AssetImage('assets/pictures/normal.png');
+    AssetImage moodImage = AssetImage('assets/pictures/normal1.png');
 
 
 
   @override
   Widget build(BuildContext context) {
+
+    const Color unHappyColor = Color(0xFFADD4D9);
+    const Color depressColor = Color(0xFF85A2A6);
+    const Color normalColor = Color(0xFFf5d791);
+    const Color happyColor = Color(0xFFF29580);
+    const Color maniacColor = Color(0xFFF2695C);
+
     var iconThemeData = IconThemeData(color: const Color.fromARGB(255, 40, 40, 40));
     return Scaffold(
         backgroundColor: Colors.white,
@@ -103,33 +110,33 @@ class _MoodHomeState extends State<MoodHome> {
                           setState(() {
                             sliderValue = newValue;
                             if (sliderValue > 0.0 && sliderValue <= 1.0) {
-                              moodColor = Colors.deepPurple;
+                              moodColor = depressColor;
                               moodString = moodStringList[0];
-                              moodImage = AssetImage("assets/pictures/depress.png");
+                              moodImage = AssetImage("assets/pictures/depress1.png");
                               moodE = "Depress";
                             } else if (sliderValue > 1.0 &&
                                 sliderValue <= 2.0) {
-                              moodColor = Colors.blue;
+                              moodColor = unHappyColor;
                               moodString = moodStringList[1];
-                              moodImage = AssetImage("assets/pictures/sad.png");
+                              moodImage = AssetImage("assets/pictures/sad1.png");
                               moodE = "Unhappy";
                             } else if (sliderValue > 2.0 &&
                                 sliderValue <= 3.0) {
-                              moodColor = Colors.blueGrey;
+                              moodColor = normalColor;
                               moodString = moodStringList[2];
-                              moodImage = AssetImage("assets/pictures/normal.png");
+                              moodImage = AssetImage("assets/pictures/normal1.png");
                               moodE = "Normal";
                             } else if (sliderValue > 3.0 &&
                                 sliderValue <= 4.0) {
-                              moodColor = Colors.amber;
+                              moodColor = happyColor;
                               moodString = moodStringList[3];
-                              moodImage = AssetImage("assets/pictures/happy.png");
+                              moodImage = AssetImage("assets/pictures/happy1.png");
                               moodE = "Happy";
                             } else if (sliderValue > 4.0 &&
                                 sliderValue <= 5.0) {
-                              moodColor = Colors.pink;
+                              moodColor = maniacColor;
                               moodString = moodStringList[4];
-                              moodImage = AssetImage("assets/pictures/mania.png");
+                              moodImage = AssetImage("assets/pictures/mania1.png");
                               moodE = "Maniac";
                             }
                           });

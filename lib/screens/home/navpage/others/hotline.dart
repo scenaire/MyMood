@@ -26,6 +26,14 @@ class HotlinePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children:  <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              padding: EdgeInsets.all(0),
+              margin: EdgeInsets.all(0),
+              child: FittedBox(
+                child: Image.asset('assets/pictures/support.png'), fit: BoxFit.fill,
+              ),
+            ),
             DMHCard(),
             SamaritansCard(),
             IStrongCard(),

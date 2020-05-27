@@ -4,6 +4,7 @@ import 'package:mymood/Models/Mood.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Home/navpage/homepage/eachMoodDetail.dart';
 import 'package:mymood/Screens/Home/navpage/others/hotline.dart';
+import 'package:mymood/Screens/Home/navpage/others/searchClinic.dart';
 import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
 import 'package:mymood/Services/MoodCloudFirestore.dart';
 import 'package:mymood/Services/thCalendar.dart';
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   minWidth: 150,
                   child: FlatButton(
                     color: Theme.of(context).primaryColor,
-                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage(user: widget.user))); }, 
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => SearchClinic())); }, 
                     child: Text('ทำแบบประเมิน', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
                 )
               ]
@@ -101,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   minWidth: 150,
                   child: FlatButton(
                     color: Theme.of(context).primaryColor,
-                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage(user: widget.user))); }, 
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => SearchClinic())); }, 
                     child: Text('ค้นหาคลินิกจิตเวช', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
                 )
               ]

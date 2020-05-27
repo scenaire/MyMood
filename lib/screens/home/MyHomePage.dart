@@ -3,6 +3,7 @@ import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Authenticate/Firstpage.dart';
 import 'package:mymood/Screens/Home/navpage/others/hotline.dart';
+import 'package:mymood/Screens/Home/navpage/others/searchClinic.dart';
 import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
 import 'package:mymood/Services/Auth.dart';
 import 'package:mymood/screens/home/my_mood_icon_icons.dart';
@@ -132,7 +133,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       "ค้นหาคลีนิคสุขภาพจิตใกล้คุณ",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchClinic()));
+              },
             ),
             ListTile(
               title: Text(

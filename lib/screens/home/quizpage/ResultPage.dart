@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Home/MyHomePage.dart';
 import 'package:mymood/Screens/Home/navpage/others/hotline.dart';
+import 'package:mymood/Screens/Home/navpage/others/searchClinic.dart';
 import 'package:mymood/Screens/Home/quizpage/EightQPage.dart';
 import 'package:mymood/Screens/Home/quizpage/MDQPage.dart';
 import 'package:mymood/Screens/Home/quizpage/NineQPage.dart';
@@ -61,7 +62,7 @@ class QuizResult extends StatelessWidget {
           elevation: 0.0,
           child: Text('ค้นหาคลินิกใกล้เคียง', style: TextStyle(fontFamily: 'prompt',fontSize: 16, color: Colors.black)),
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: user, currentPage: 0,)));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SearchClinic()));
           }
         ),));
       list.add(Padding(padding: EdgeInsets.symmetric(vertical: 2),));
@@ -290,7 +291,7 @@ class QuizResult extends StatelessWidget {
           elevation: 0.0,
           child: Text('ค้นหาคลินิกใกล้เคียง', style: TextStyle(fontFamily: 'prompt',fontSize: 16, color: Colors.black)),
           onPressed: () {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyHomePage(user: user, currentPage: 0,)));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SearchClinic()));
           }
         ),));
       list.add(Padding(padding: EdgeInsets.symmetric(vertical: 2),));
