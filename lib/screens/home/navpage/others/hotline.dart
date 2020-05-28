@@ -7,6 +7,7 @@ class HotlinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: iconThemeData,
@@ -28,11 +29,16 @@ class HotlinePage extends StatelessWidget {
           children:  <Widget>[
             Container(
               width: MediaQuery.of(context).size.width,
+              height: 165,
               padding: EdgeInsets.all(0),
               margin: EdgeInsets.all(0),
-              child: FittedBox(
-                child: Image.asset('assets/pictures/support.png'), fit: BoxFit.fill,
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/pictures/support.png'),
+                fit: BoxFit.cover
               ),
+                
+              ),
+              
             ),
             DMHCard(),
             SamaritansCard(),

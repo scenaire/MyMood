@@ -157,6 +157,7 @@ class _MoodHomeState extends State<MoodHome> {
                         padding: EdgeInsets.all(20),
                         child: RaisedButton(
                           color: Theme.of(context).primaryColor,
+                          elevation: 0.0,
                           shape: RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(10.0)),
                           child: Text(
