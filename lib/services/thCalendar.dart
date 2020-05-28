@@ -30,6 +30,17 @@ class THCalendar {
 
   }
 
+  String changetoThaiDateSmall(DateTime date) {
+
+    String formattedDate = DateFormat('dd-MM-yyyy').format(date);
+    var splitArr = formattedDate.split('-');
+
+    //String timeFormatted = DateFormat('HH:mm').format(date);
+
+    return splitArr[0]+" "+monthInThaiSmall(splitArr[1])+" "+toBuddhistEra(splitArr[2])[2]+toBuddhistEra(splitArr[2])[3];
+
+  }
+
   String dateandTimeFormatted(DateTime date) {
     String formattedDate = DateFormat('dd-MM-H:mm').format(date);
     var splitArr = formattedDate.split('-');
@@ -69,6 +80,26 @@ class THCalendar {
       case '10': monthTh = "ตุลาคม";   break;
       case '11': monthTh = "พฤศจิกายน";   break;
       case '12': monthTh = "ธันวาคม";   break;
+      default: monthTh = "หือออ";
+    }
+    return monthTh;
+  }
+
+  String monthInThaiSmall(var month) {
+    String monthTh;
+    switch (month) {
+      case '01': monthTh = "ม.ค.";   break;
+      case '02': monthTh = "ก.พ.";   break;
+      case '03': monthTh = "มี.ค.";   break;
+      case '04': monthTh = "เม.ย";   break;
+      case '05': monthTh = "พ.ค.";   break;
+      case '06': monthTh = "มิ.ย.";   break;
+      case '07': monthTh = "ก.ค.";   break;
+      case '08': monthTh = "ส.ค.";   break;
+      case '09': monthTh = "ก.ย.";   break;
+      case '10': monthTh = "ต.ค.";   break;
+      case '11': monthTh = "พ.ย.";   break;
+      case '12': monthTh = "ธ.ค.";   break;
       default: monthTh = "หือออ";
     }
     return monthTh;

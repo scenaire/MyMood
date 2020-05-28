@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mymood/Models/Mood.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Services/MoodCloudFirestore.dart';
+import 'package:mymood/Services/thCalendar.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class SummaryGraphs extends StatelessWidget {
@@ -13,7 +14,7 @@ class SummaryGraphs extends StatelessWidget {
 
   Future<List<Mood>> retriveData() async {
       MoodCloudFirestore mc = MoodCloudFirestore(uid: user.uid);
-      return await mc.retriveMoodData();
+      return await mc.retriveMoodDataFB();
   }
 
   @override
@@ -40,11 +41,13 @@ class SummaryGraphs extends StatelessWidget {
                       );
                     }
                   },
-                ),
+      ),
       
     );
   }
 }
+
+
 
 class LineChartMood extends StatefulWidget {
 
@@ -63,23 +66,33 @@ class _LineChartMoodState extends State<LineChartMood> {
   
   List<Color> gradientColors = [
     const Color(0xFFADD4D9),
-    //const Color(0xFF85A2A6),
+    const Color(0xFF85A2A6),
+    const Color(0xFFf5d791),
+    const Color(0xFFF29580),
+    const Color(0xFFF2695C),
   ];
-  
+
   @override
   Widget build(BuildContext context) {
+
+    THCalendar cal = new THCalendar();
+
+    String startDate = cal.changetoThaiDateSmall(widget.moodList[0].time);
+    String endDate = cal.changetoThaiDateSmall(widget.moodList[widget.moodList.length - 1].time);
+
     return Column(
       children: <Widget>[
 
         Padding(padding: EdgeInsets.only(top: 20.0)),
 
-        Text('กราฟอารมณ์ของคุณ', style: TextStyle(color: Colors.teal, fontSize: 20),),
+        Text('กราฟอารมณ์ของคุณ', style: TextStyle(color: Colors.teal, fontSize: 18, fontFamily: 'anakotmai medium'),),
+        Text('วันที่ $startDate ถึง $endDate ', style: TextStyle(color: Colors.grey, fontSize: 16),),
 
-        Padding(padding: EdgeInsets.only(top: 20.0)),
+        Padding(padding: EdgeInsets.only(top: 10.0)),
         //Text('วันที่ บลาๆๆ', style: TextStyle(color: Colors.black),),
 
         AspectRatio(
-          aspectRatio: 1.70,
+          aspectRatio: 2.0,
           child: Container(
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(18)),
@@ -94,23 +107,27 @@ class _LineChartMoodState extends State<LineChartMood> {
           )
         ),
 
+        
+
       ],
     );
   }
 
   List<FlSpot> getSpots() {
+
     List<FlSpot> spots = new List<FlSpot>();
 
-    for(int i=0; i<widget.moodList.length; i++) {
+    double x = 0.0;
 
-      switch(widget.moodList[i].getType) {
-        case "Depress": spots.add(FlSpot(i.toDouble(),0.0)); break;
-        case "Unhappy":  spots.add(FlSpot(i.toDouble(),1.0));;  break;
-        case "Normal":  spots.add(FlSpot(i.toDouble(),2.0));;  break;
-        case "Happy":  spots.add(FlSpot(i.toDouble(),3.0));;  break;
-        case "Maniac":  spots.add(FlSpot(i.toDouble(),4.0));; break;
+    for (Mood m in widget.moodList) {
+      switch (m.type) {
+        case "Depress" : spots.add(FlSpot(x,0.0)); break;
+        case "Unhappy" : spots.add(FlSpot(x,1.0)); break;
+        case "Normal" : spots.add(FlSpot(x,2.0)); break;
+        case "Happy" : spots.add(FlSpot(x,3.0)); break;
+        case "Maniac" : spots.add(FlSpot(x,4.0)); break;
       }
-
+      x++;
     }
 
     return spots;
@@ -121,45 +138,72 @@ class _LineChartMoodState extends State<LineChartMood> {
     return LineChartData(
 
       gridData: FlGridData(
-        show: false
+        show: false,
+        drawHorizontalLine: false,
+        drawVerticalLine: true,
+        getDrawingVerticalLine: (value) {
+          return FlLine(
+            color: const Color(0xFF85A2A6),
+            strokeWidth: 1,
+          );
+        }
       ),
       
       titlesData: FlTitlesData(
         show: true,
         bottomTitles: SideTitles(
           showTitles: false,
-          reservedSize: 22,
-          textStyle:
-              const TextStyle(color: Color(0xff68737d), fontWeight: FontWeight.bold, fontSize: 16),
-          getTitles: (value) {
-            switch (value.toInt()) {
-              case 2:
-                return 'MAR';
-              case 5:
-                return 'JUN';
-              case 8:
-                return 'SEP';
-            }
-            return '';
-          },
           margin: 8,
         ),
         leftTitles: SideTitles(
           showTitles: false,
         ),
       ),
+
+
+      lineTouchData: LineTouchData(
+        touchTooltipData: LineTouchTooltipData(
+          tooltipBgColor: Colors.white,
+          getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
+            return touchedBarSpots.map((barSpot) {
+                          final flSpot = barSpot;
+                          String msg = '';
+
+                          switch ((flSpot.y).floor()){
+                            case 1 :  msg = "รู้สึกแย่";  break;
+                            case 2 :  msg = "ปกติ";  break;
+                            case 3 :  msg = "รู้สึกดี";  break;
+                            case 4 :  msg = "มีความสุขมาก"; break;
+                            default : msg = "เศร้ามาก"; break;
+                          }
+
+                          THCalendar cal = new THCalendar();
+
+                          String date = cal.changetoThaiDateSmall(widget.moodList[(flSpot.x).floor()].time);
+                          
+                          return LineTooltipItem(
+                            '$msg \n $date',
+                            const TextStyle(color: Colors.teal, fontFamily: 'anakotmai medium'),
+                          );
+                        }).toList();
+                      }
+        ),
+      ),
+
+
+
       borderData:
           FlBorderData(show: true, border: Border.all(color: const Color(0xFF85A2A6), width: 1)),
       minX: 0,
       maxX: widget.moodList.length.toDouble() - 1,
-      minY: 0,
+      minY: -1,
       maxY: 5,
       lineBarsData: [
         LineChartBarData(
           spots: getSpots(),
           isCurved: true,
           colors: gradientColors,
-          barWidth: 5,
+          barWidth: 3,
           isStrokeCapRound: true,
           dotData: FlDotData(
             show: false,
@@ -167,8 +211,17 @@ class _LineChartMoodState extends State<LineChartMood> {
           belowBarData: BarAreaData(
             show: true,
             colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+            spotsLine: BarAreaSpotsLine(
+              show: true,
+              flLineStyle: FlLine(
+                color: const Color(0xFFADD4D9),
+                strokeWidth: 2,
+              )
+            ),
+            
           ),
         ),
+        
       ],
     );
   }

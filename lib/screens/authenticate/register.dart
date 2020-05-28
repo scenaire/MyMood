@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mymood/Screens/Home/MyHomePage.dart';
+import 'package:mymood/Screens/Home/instructions/instructionsMain.dart';
 import 'package:mymood/Services/Auth.dart';
 import 'package:mymood/Widgets/loadingPage.dart';
 import 'package:password_strength/password_strength.dart';
@@ -108,8 +108,7 @@ class _RegisterState extends State<Register> {
                                     Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                MyHomePage(user: result, currentPage: 0,)));
+                                            builder: (context) => InstructionMain(user: result,)));
                                   }
                                 }
                               },

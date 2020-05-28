@@ -64,11 +64,46 @@ class MoodCloudFirestore {
 
   }
 
+  Future<List<Mood>> retriveMoodDataFB() async {
+
+    QuerySnapshot snapshot = await moodCollection
+    .document(uid)
+    .collection('moodList')
+    .getDocuments();
+
+    List<Mood> _moodList = [];
+
+
+    snapshot.documents.forEach((document) {
+      _moodList.add(
+        new Mood(
+          type: document['mood'],
+          time: document['time'].toDate(), 
+          message: document['message'], 
+          fav: document['fav'], 
+          negative: document['negative'], 
+          suicidal: document['suicide']
+        ));
+
+    });
+    
+    return sortListByDateTimeFB(_moodList);
+    
+
+  }
+
   //SORT ARRAY 
 
-  List<Mood> sortListByDateTime (List<Mood> list) {
+  List<Mood> sortListByDateTime(List<Mood> list) {
     list.sort(
       (b, a) => a.time.compareTo(b.time)
+    );
+    return list;
+  }
+
+  List<Mood> sortListByDateTimeFB(List<Mood> list) {
+    list.sort(
+      (a, b) => a.time.compareTo(b.time)
     );
     return list;
   }

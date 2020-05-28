@@ -27,13 +27,13 @@ class _SleepHistoryState extends State<SleepHistory> {
     THCalendar thCalendar = new THCalendar();
     List<Widget> list = new List<Widget>();
 
-    DateTime currentTime = sList[0].createDate;
+    DateTime currentTime = sList[0].getSleepTime;
     int end = sList.length;
 
     list.add(new DateCard(date: thCalendar.changetoThaiDate(currentTime)));
 
     for (var i=0; i < end; i++) {
-      String dif = DateFormat('yyyy-MM-dd').format(sList[i].createDate);
+      String dif = DateFormat('yyyy-MM-dd').format(sList[i].getSleepTime);
       String com = DateFormat('yyyy-MM-dd').format(currentTime);
       if (dif == com) {
           list.add(
@@ -64,7 +64,7 @@ class _SleepHistoryState extends State<SleepHistory> {
   Widget build(BuildContext context) {
     return Container(
 
-      color: Color(0xFFF2F2F2),
+      color: Color(0xFFFFFFFF),
       child: new SingleChildScrollView(
         child: Column (
           

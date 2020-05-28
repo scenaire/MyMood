@@ -105,7 +105,7 @@ class _MoodAddonsState extends State<MoodAddons> {
                     setState(() {
                         loading = true;
                     });
-                    Future.delayed(const Duration(seconds: 10),
+                    Future.delayed(const Duration(seconds: 13),
                       () {
                         setState(() {
                           loading = false;
