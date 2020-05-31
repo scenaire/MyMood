@@ -63,20 +63,20 @@ class SleepCloudFireStore {
       _sleepList.add(new Sleep(createDate: document['create_date'].toDate(), sleep: document['start_sleep'].toDate(), wakeUp: document['wake_up'].toDate(), calculateSleepTime: document['calculate_sleep_time']));
     });
 
-    return sortListByDateTime(_sleepList);
+    return sortListByDateTimeFB(_sleepList);
 
   }
 
   List<Sleep> sortListByDateTime(List<Sleep> list) {
     list.sort(
-      (b, a) => a.getCreateDate.compareTo(b.getCreateDate)
+      (b, a) => a.getWakeUp.compareTo(b.getWakeUp)
     );
     return list;
   }
 
   List<Sleep> sortListByDateTimeFB(List<Sleep> list) {
     list.sort(
-      (a, b) => a.getCreateDate.compareTo(b.getCreateDate)
+      (a, b) => a.getWakeUp.compareTo(b.getWakeUp)
     );
     return list;
   }

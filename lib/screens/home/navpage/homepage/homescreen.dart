@@ -5,6 +5,7 @@ import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Home/navpage/homepage/eachMoodDetail.dart';
 import 'package:mymood/Screens/Home/navpage/others/hotline.dart';
 import 'package:mymood/Screens/Home/navpage/others/searchClinic.dart';
+import 'package:mymood/Screens/Home/quizpage/MDQPage.dart';
 import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
 import 'package:mymood/Services/MoodCloudFirestore.dart';
 import 'package:mymood/Services/thCalendar.dart';
@@ -34,6 +35,72 @@ class _HomeScreenState extends State<HomeScreen> {
     moodData = retriveData();
   }
 
+  Widget notificationDepressGraphs() {
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              border: Border.all(width: 3, color: Color(0xFFCAE7E7),),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('เราอยากช่วยเหลือคุณ', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 20, color: Colors.black), textAlign: TextAlign.center,),
+                Container(
+                  margin: EdgeInsets.all(8.0), 
+                  child: Image.asset('assets/pictures/nursing.png'),
+                ),
+                Text('เราตรวจพบว่าคุณมีความเสี่ยงของโรคซึมเศร้า', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('จากการกรอกข้อมูลอารมณ์ของคุณ', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('เราขอแนะนำให้คุณทำแบบประเมินความเสี่ยง', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Padding(padding: EdgeInsets.only(bottom: 8.0)),
+                ButtonTheme(
+                  minWidth: 150,
+                  child: FlatButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage())); }, 
+                    child: Text('ทำแบบประเมินโรคซึมเศร้า', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
+                )
+              ]
+            )
+          );
+  }
+
+  Widget notificationBipolarGraphs() {
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              border: Border.all(width: 3, color: Color(0xFFCAE7E7),),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('เราอยากช่วยเหลือคุณ', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 20, color: Colors.black), textAlign: TextAlign.center,),
+                Container(
+                  margin: EdgeInsets.all(8.0), 
+                  child: Image.asset('assets/pictures/nursing.png'),
+                ),
+                Text('เราตรวจพบว่าคุณมีความเสี่ยงของโรคอารมณ์สองขั้ว', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('จากการกรอกข้อมูลอารมณ์ของคุณ', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('เราขอแนะนำให้คุณทำแบบประเมินความเสี่ยง', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Padding(padding: EdgeInsets.only(bottom: 8.0)),
+                ButtonTheme(
+                  minWidth: 150,
+                  child: FlatButton(
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => MDQPage())); }, 
+                    child: Text('ทำแบบประเมิน MDQ', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
+                )
+              ]
+            )
+          );
+  }
+
   Widget notificationDepress() {
 
     return Container(
@@ -60,7 +127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   minWidth: 150,
                   child: FlatButton(
                     color: Theme.of(context).primaryColor,
-                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => SearchClinic())); }, 
+                    onPressed: () { Navigator.push(context, MaterialPageRoute(builder: (context) => TwoQPage())); }, 
                     child: Text('ทำแบบประเมิน', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 14, color: Colors.white), textAlign: TextAlign.center,),),
                 )
               ]
@@ -109,7 +176,90 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           );
   }
-  
+
+  bool checkDepress(List<Mood> mList) {
+
+    bool isDepression = true;
+    DateTime current = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    DateTime end = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day - 13);
+
+    if (mList.length < 14) {
+      return false;
+    }
+
+    for (int i=0; i<mList.length; i++) {
+
+      if (current.isAfter(end)) {
+
+        if (mList[i].getType != 'Depress' && mList[i].getType != 'Unhappy') {
+          isDepression = false;
+          return isDepression;
+        } else {
+          current = new DateTime(current.year, current.month, current.day - 1);
+        }
+      } else {
+        return isDepression;
+      }
+    }
+
+    return isDepression;
+
+  }
+
+  bool checkBipolar(List<Mood> mList) {
+    bool isMania = true;
+    DateTime current = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+
+    if (mList.length < 20) {
+      return false;
+    }
+
+    // Mania phase -- Start
+    if (mList[0].getType == 'Happy' || mList[0].getType == 'Maniac') {
+
+      DateTime end = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day - 7);
+      int j = 0;
+      bool depressState = false;
+
+      for (int i=0; i<mList.length; i++) {
+        if (current.isAfter(end)) {
+          if (mList[i].getType != 'Happy' && mList[i].getType != 'Maniac') {
+            isMania = false;
+            return isMania;
+          } else {
+            current = new DateTime(current.year, current.month, current.day - 1);
+          }
+        } else {
+          if (mList[i].getType == 'Happy' || mList[i].getType == 'Maniac') {
+            if (!depressState) {
+              current = new DateTime(current.year, current.month, current.day - 1);
+            }
+          } else if (mList[i].getType == 'Unhappy' || mList[i].getType == 'Depress') {
+
+            depressState = true;
+
+            
+              if (j < 20) {
+                if (mList[i].getType != 'Depress' && mList[i].getType != 'Unhappy') {
+                return false;
+              } else {
+                current = new DateTime(current.year, current.month, current.day - 1);
+              }
+              }
+            
+          } else {
+            return false;
+          }
+
+        }
+      }
+      
+    } else if (mList[0].getType == 'Unhappy' || mList[0].getType == 'Depress') {
+
+    }
+
+    return isMania;
+  }
 
   Widget addSeperateByDate(List<Mood> mList) {
     THCalendar thCalendar = new THCalendar();
@@ -117,6 +267,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
     DateTime currentTime = mList[0].time;
     int end = mList.length;
+
+    if (checkBipolar(mList)) {
+      list.add(notificationBipolarGraphs());
+    } else if (checkDepress(mList)) {
+      list.add(notificationDepressGraphs());
+    }
 
     if(mList[0].suicidal.trim() != '') {
       list.add(notificationSuicidal());

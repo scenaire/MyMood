@@ -76,14 +76,74 @@ class _LineChartSleepState extends State<LineChartSleep> {
     const Color(0xFFF2695C),
   ];
 
+  double getAvgSleepTime() {
+      int sum = 0;
+      for (int i=0; i<widget.sleepList.length; i++) {
+        sum = sum + widget.sleepList[i].calculateSleepTime;
+      }
+
+      return sum/widget.sleepList.length;
+  }
+
+    Widget notificationLess() {
+
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              // border: Border.all(width: 3, color: const Color.fromARGB(255, 251, 215, 219)),
+               borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('คุณนอนน้อยมากเลย', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('ดูแลรักษาสุขภาพด้วยนะคะ', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+              ]
+            )
+          );
+  }
+
+  Widget notificationMore() {
+
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              // border: Border.all(width: 3, color: const Color.fromARGB(255, 251, 215, 219)),
+               borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('คุณนอนมากเกินไป', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('ดูแลรักษาสุขภาพด้วยนะคะ', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+              ]
+            )
+          );
+  }
+
   @override
   Widget build(BuildContext context) {
 
+    
+
     THCalendar cal = new THCalendar();
 
-    String startDate = cal.changetoThaiDateSmall(widget.sleepList[0].createDate);
-    String endDate = cal.changetoThaiDateSmall(widget.sleepList[widget.sleepList.length - 1].createDate);
+    String startDate = cal.changetoThaiDateSmall(widget.sleepList[0].getSleepTime);
+    String endDate = cal.changetoThaiDateSmall(widget.sleepList[widget.sleepList.length - 1].getSleepTime);
 
+    double avgSleep = getAvgSleepTime();
+    bool less = false; 
+    bool more = false;
+
+    if (avgSleep < 7) {
+      less = true;
+    } else if (avgSleep > 10) {
+      more = true;
+    }
     
     return Container(
 
@@ -118,7 +178,23 @@ class _LineChartSleepState extends State<LineChartSleep> {
 
         Container(
           height: 240,
-          color: Colors.white
+          color: Colors.white,
+          child: Column(
+            children: <Widget> [
+
+              less?notificationLess():Container(),
+
+              more?notificationMore():Container(),
+
+              Padding(padding: EdgeInsets.only(top: 20)),
+
+              Text('เวลาเฉลี่ยการนอนของคุณ', style: TextStyle(color: Colors.teal, fontSize: 18, fontFamily: 'anakotmai medium'),),
+
+              Text(avgSleep.toInt().toString(), style: TextStyle(color: Colors.grey[800], fontSize: 32, fontFamily: 'anakotmai medium'),),
+              Text('ชั่วโมง', style: TextStyle(color: Colors.grey[600], fontSize: 18, fontFamily: 'anakotmai medium'),),
+
+            ]
+          ),
         )
 
         ],

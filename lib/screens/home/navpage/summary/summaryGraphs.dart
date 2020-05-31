@@ -64,13 +64,13 @@ class LineChartMood extends StatefulWidget {
 
 class _LineChartMoodState extends State<LineChartMood> {
   
-  List<Color> gradientColors = [
-    const Color(0xFFADD4D9),
-    const Color(0xFF85A2A6),
-    const Color(0xFFf5d791),
-    const Color(0xFFF29580),
-    const Color(0xFFF2695C),
-  ];
+  // List<Color> gradientColors = [
+  //   const Color(0xFFADD4D9),
+  //   const Color(0xFF85A2A6),
+  //   const Color(0xFFf5d791),
+  //   const Color(0xFFF29580),
+  //   const Color(0xFFF2695C),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,15 @@ class _LineChartMoodState extends State<LineChartMood> {
           )
         ),
 
+
+        Padding(padding: EdgeInsets.only(top: 20)),
+
+        Text('จำนวนอารมณ์ของคุณ', style: TextStyle(color: Colors.teal, fontSize: 18, fontFamily: 'anakotmai medium'),),
+
+        Padding(padding: EdgeInsets.only(top: 10)),
+
         
+
 
       ],
     );
@@ -202,7 +210,10 @@ class _LineChartMoodState extends State<LineChartMood> {
         LineChartBarData(
           spots: getSpots(),
           isCurved: true,
-          colors: gradientColors,
+          colors: [
+              const Color(0xFFF2695C).withOpacity(0.6),
+              const Color(0xFFADD4D9).withOpacity(0.6),
+          ],
           barWidth: 3,
           isStrokeCapRound: true,
           dotData: FlDotData(
@@ -210,7 +221,13 @@ class _LineChartMoodState extends State<LineChartMood> {
           ),
           belowBarData: BarAreaData(
             show: true,
-            colors: gradientColors.map((color) => color.withOpacity(0.3)).toList(),
+            colors: [
+              const Color(0xFFF2695C).withOpacity(0.3),
+              const Color(0xFFADD4D9).withOpacity(0.3),
+            ],
+            gradientColorStops: [0.3, 1.0],
+            gradientFrom: const Offset(0,0),
+            gradientTo: const Offset(0, 1),
             spotsLine: BarAreaSpotsLine(
               show: true,
               flLineStyle: FlLine(

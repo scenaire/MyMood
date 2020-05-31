@@ -97,13 +97,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 25, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
             ),
-            ListTile(
-              title: Text(
-                      "จัดการโปรไฟล์",
-                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
-                    ),
-              onTap: () {},
-            ),
+            // ListTile(
+            //   title: Text(
+            //           "จัดการโปรไฟล์",
+            //           style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+            //         ),
+            //   onTap: () {},
+            // ),
             ListTile(
               title: Text(
                       "แนะนำการใช้งาน",

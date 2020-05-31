@@ -41,7 +41,7 @@ class SummaryYear extends StatelessWidget {
                     }
                     else {
                       return SingleChildScrollView(
-                        child: MonthCalendar(moodList: snapshot.data,)
+                        child: AllCalendar(moodList: snapshot.data,)
                       );
                     }
                   },
@@ -84,6 +84,50 @@ class MoodIcon extends StatelessWidget {
         Navigator.push(context, MaterialPageRoute(builder: (context) => MoodDetail(mood: mood,)));
       },
       child: Image.asset(moodIcon)
+    );
+  }
+}
+
+class AllCalendar extends StatelessWidget {
+
+  final List<Mood> moodList;
+
+  const AllCalendar({
+    Key key,
+    this.moodList
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+
+    List<Mood> monthList = new List<Mood>();
+    DateTime current = new DateTime(moodList[0].time.year,moodList[0].time.month, moodList[0].time.day);
+    List<Widget> mCalendar = new List<Widget>();
+    List<Mood> temp = new List<Mood>();
+
+    for (int i=0; i<moodList.length; i++) {
+      
+      if (current.month != moodList[i].time.month) {
+        temp.addAll(monthList);
+        monthList.clear();
+        mCalendar.add(MonthCalendar(moodList: temp,));
+        current = new DateTime(DateTime.now().year, DateTime.now().month - 1, DateTime.now().day);
+        monthList.add(moodList[i]);
+      } else {
+        monthList.add(moodList[i]);
+      }
+
+      if (i == moodList.length-1) {
+        mCalendar.add(MonthCalendar(moodList: monthList,));
+      }
+      
+      
+    }
+
+    return Container(
+      child: Column(
+        children: mCalendar
+      ),
     );
   }
 }
@@ -199,6 +243,8 @@ class MonthCalendar extends StatelessWidget {
       child: Column(
 
         children: <Widget>[
+
+          Padding(padding: EdgeInsets.only(top: 30.0)),
 
           Text(getYear(), style: TextStyle(fontWeight: FontWeight.bold),),
 

@@ -23,9 +23,69 @@ class _SleepHistoryState extends State<SleepHistory> {
     return await sc.retriveSleepData();
   }
 
+  
+
+  Widget notificationLessGraphs() {
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              border: Border.all(width: 3, color: Color(0xFFCAE7E7),),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('คุณนอนน้อยเกินไป', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 20, color: Colors.black), textAlign: TextAlign.center,),
+                Container(
+                  margin: EdgeInsets.all(8.0), 
+                  child: Image.asset('assets/pictures/nursing.png'),
+                ),
+                Text('การนอนที่ดีควรอยู่ในระหว่าง 7 - 10 ชั่วโมง', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('ดูแลสุขภาพด้วยนะคะ', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Padding(padding: EdgeInsets.only(bottom: 8.0)),
+              ]
+            )
+          );
+  }
+
+  Widget notificationMoreGraphs() {
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              border: Border.all(width: 3, color: Color(0xFFCAE7E7),),
+              borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('คุณนอนมากเกินไป', style: TextStyle(fontFamily: 'Anakotmai Medium', fontSize: 20, color: Colors.black), textAlign: TextAlign.center,),
+                Container(
+                  margin: EdgeInsets.all(8.0), 
+                  child: Image.asset('assets/pictures/nursing.png'),
+                ),
+                Text('การนอนที่ดีควรอยู่ในระหว่าง 7 - 10 ชั่วโมง', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('ดูแลสุขภาพด้วยนะคะ', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Padding(padding: EdgeInsets.only(bottom: 8.0)),
+              ]
+            )
+          );
+  }
+
   Widget addSeperateByDate(List<Sleep> sList) {
     THCalendar thCalendar = new THCalendar();
     List<Widget> list = new List<Widget>();
+
+    if (sList[0].calculateSleepTime < 7) {
+      list.add(notificationLessGraphs());
+    }
+
+    if (sList[0].calculateSleepTime > 10) {
+      list.add(notificationMoreGraphs());
+    }
 
     DateTime currentTime = sList[0].getSleepTime;
     int end = sList.length;
@@ -40,7 +100,7 @@ class _SleepHistoryState extends State<SleepHistory> {
             new SleepCard(sleep: sList[i],)
           );
       } else {
-          currentTime = sList[i].createDate;
+          currentTime = sList[i].getSleepTime;
           list.add(
             new DateCard(date: thCalendar.changetoThaiDate(currentTime))
           );

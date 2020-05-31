@@ -15,6 +15,45 @@ class MoodDetail extends StatefulWidget {
 
 class _MoodDetailState extends State<MoodDetail> {
 
+  Widget notificationSuicidal() {
+
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              // border: Border.all(width: 3, color: const Color.fromARGB(255, 251, 215, 219)),
+               borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('เราตรวจพบว่าคุณมีความเสี่ยงในการทำร้ายตนเอง', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('โปรดปรึกษาจิตแพทย์หรือสายด่วนสุขภาพจิตโดยด่วน', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+              ]
+            )
+          );
+  }
+
+  Widget notificationDepress() {
+
+    return Container(
+            width: MediaQuery.of(context).size.width - 30,
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 15, right: 15, top: 15),
+            decoration: BoxDecoration(
+              color: Color(0xFFCAE7E7),
+              // border: Border.all(width: 3, color: const Color.fromARGB(255, 251, 215, 219)),
+               borderRadius: BorderRadius.all(Radius.circular(16.0))
+            ),
+            child: Column(
+              children: <Widget> [
+                Text('เราตรวจพบว่าคุณมีความเสี่ยงในการเป็นโรคซึมเศร้า', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+                Text('โปรดปรึกษาจิตแพทย์หรือสายด่วนสุขภาพจิตโดยด่วน', style: TextStyle(fontFamily: 'prompt', fontSize: 14, color: Colors.grey[600]), textAlign: TextAlign.center,),
+              ]
+            )
+          );
+  }
 
 
   @override
@@ -41,6 +80,8 @@ class _MoodDetailState extends State<MoodDetail> {
       case "Happy": icon = "assets/pictures/cHappy2.png"; moodColor = happyColor; title = "รู้สึกดี"; break;
       case "Maniac": icon = "assets/pictures/cManiac2.png"; moodColor = maniacColor; title = "มีความสุขมาก"; break;
     }
+
+    
 
     List<TextSpan> getTextSpan() {
       List<TextSpan> list = new List<TextSpan>();
@@ -102,9 +143,9 @@ class _MoodDetailState extends State<MoodDetail> {
       for (int i=0; i<widget.mood.message.length; i++) {
 
         if (suicideStack.contains(i)) {
-          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Colors.red[400]),));
+          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: depressColor),));
         } else if (negativeStack.contains(i)) {
-          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Colors.deepPurple[400]),));
+          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: depressColor),));
         } else {
           list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Colors.grey[700]),));
         }
@@ -141,6 +182,8 @@ class _MoodDetailState extends State<MoodDetail> {
 
                       children: <Widget>[
 
+
+
                         Text(
                     thCal.changetoThaiDate(widget.mood.time),
                     style: TextStyle(fontFamily: 'Prompt', fontSize: 22, color: moodColor, fontWeight: FontWeight.w500),
@@ -165,6 +208,8 @@ class _MoodDetailState extends State<MoodDetail> {
                     title,
                     style: TextStyle(fontFamily: 'Prompt', fontSize: 22, color: moodColor, fontWeight: FontWeight.w500),
                     ),
+
+                widget.mood.suicidal.trim().isNotEmpty ? notificationSuicidal() : widget.mood.negative.trim().isNotEmpty ? notificationDepress() : Container(),
 
                 Container(
                   margin: EdgeInsets.symmetric(vertical : 20, horizontal: 30),
@@ -193,9 +238,7 @@ class _MoodDetailState extends State<MoodDetail> {
                       // )
                 ),
                   )
-                )
-
-
+                ),
 
 
             ],
