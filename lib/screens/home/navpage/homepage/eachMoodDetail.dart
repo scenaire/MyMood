@@ -66,10 +66,10 @@ class _MoodDetailState extends State<MoodDetail> {
     THCalendar thCal = new THCalendar();
     String title;
 
-    const Color unHappyColor = Color(0xFFADD4D9);
-    const Color depressColor = Color(0xFF85A2A6);
-    const Color normalColor = Color(0xFFf5d791);
-    const Color happyColor = Color(0xFFF29580);
+    const Color depressColor = Color(0xFFbe9abf);
+    const Color unHappyColor = Color(0xFF85A2A6);
+    const Color normalColor = Color(0xFFced994);
+    const Color happyColor = Color(0xFFf5d791);
     const Color maniacColor = Color(0xFFF2695C);
 
 
@@ -78,7 +78,7 @@ class _MoodDetailState extends State<MoodDetail> {
       case "Unhappy": icon = "assets/pictures/cUnhappy2.png"; moodColor = unHappyColor; title = "รู้สึกแย่"; break;
       case "Normal": icon = "assets/pictures/cNormal2.png"; moodColor = normalColor; title = "ปกติ"; break;
       case "Happy": icon = "assets/pictures/cHappy2.png"; moodColor = happyColor; title = "รู้สึกดี"; break;
-      case "Maniac": icon = "assets/pictures/cManiac2.png"; moodColor = maniacColor; title = "มีความสุขมาก"; break;
+      case "Maniac": icon = "assets/pictures/cManiac2.png"; moodColor = maniacColor; title = "คึกคัก/โกรธง่าย"; break;
     }
 
     
@@ -143,9 +143,9 @@ class _MoodDetailState extends State<MoodDetail> {
       for (int i=0; i<widget.mood.message.length; i++) {
 
         if (suicideStack.contains(i)) {
-          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: depressColor),));
+          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Color(0xFF85A2A6)),));
         } else if (negativeStack.contains(i)) {
-          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: depressColor),));
+          list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Color(0xFF85A2A6)),));
         } else {
           list.add(TextSpan(text: widget.mood.message[i], style: TextStyle(fontFamily: 'Prompt', fontSize: 14, color: Colors.grey[700]),));
         }

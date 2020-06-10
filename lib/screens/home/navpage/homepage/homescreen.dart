@@ -419,10 +419,10 @@ class MoodCard extends StatelessWidget {
     //Colors.amber[400]
     //Colors.pink[100]
 
-    const Color unHappyColor = Color(0xFFADD4D9);
-    const Color depressColor = Color(0xFF85A2A6);
-    const Color normalColor = Color(0xFFf5d791);
-    const Color happyColor = Color(0xFFF29580);
+    const Color depressColor = Color(0xFFbe9abf);
+    const Color unHappyColor = Color(0xFF85A2A6);
+    const Color normalColor = Color(0xFFced994);
+    const Color happyColor = Color(0xFFf5d791);
     const Color maniacColor = Color(0xFFF2695C);
 
     String icon;
@@ -437,7 +437,7 @@ class MoodCard extends StatelessWidget {
       case "Unhappy": icon = "assets/pictures/cUnhappy2.png"; moodColor = unHappyColor; title = "รู้สึกแย่"; break;
       case "Normal": icon = "assets/pictures/cNormal2.png"; moodColor = normalColor; title = "ปกติ"; break;
       case "Happy": icon = "assets/pictures/cHappy2.png"; moodColor = happyColor; title = "รู้สึกดี"; break;
-      case "Maniac": icon = "assets/pictures/cManiac2.png"; moodColor = maniacColor; title = "มีความสุขมาก"; break;
+      case "Maniac": icon = "assets/pictures/cManiac2.png"; moodColor = maniacColor; title = "คึกคัก/โกรธง่าย"; break;
     }
 
 

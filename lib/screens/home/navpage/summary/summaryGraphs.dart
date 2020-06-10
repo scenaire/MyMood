@@ -63,14 +63,25 @@ class LineChartMood extends StatefulWidget {
 }
 
 class _LineChartMoodState extends State<LineChartMood> {
-  
-  // List<Color> gradientColors = [
-  //   const Color(0xFFADD4D9),
-  //   const Color(0xFF85A2A6),
-  //   const Color(0xFFf5d791),
-  //   const Color(0xFFF29580),
-  //   const Color(0xFFF2695C),
-  // ];
+
+  int maniaCount;
+  int happyCount;
+  int normalCount;
+  int unhappyCount;
+  int depressCount;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    maniaCount = 0;
+    happyCount = 0;
+    normalCount = 0;
+    unhappyCount = 0;
+    depressCount = 0;
+    
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +90,16 @@ class _LineChartMoodState extends State<LineChartMood> {
 
     String startDate = cal.changetoThaiDateSmall(widget.moodList[0].time);
     String endDate = cal.changetoThaiDateSmall(widget.moodList[widget.moodList.length - 1].time);
+
+    for(int i=0; i<widget.moodList.length; i++) {
+      switch (widget.moodList[i].type) {
+        case "Depress" : maniaCount++; break;
+        case "Unhappy" : happyCount++; break;
+        case "Normal" : normalCount++; break;
+        case "Happy" : unhappyCount++; break;
+        case "Maniac" : depressCount++; break;
+      }
+    }
 
     return Column(
       children: <Widget>[
@@ -108,13 +129,26 @@ class _LineChartMoodState extends State<LineChartMood> {
         ),
 
 
-        Padding(padding: EdgeInsets.only(top: 20)),
+        Padding(padding: EdgeInsets.only(top: 10)),
 
         Text('จำนวนอารมณ์ของคุณ', style: TextStyle(color: Colors.teal, fontSize: 18, fontFamily: 'anakotmai medium'),),
 
         Padding(padding: EdgeInsets.only(top: 10)),
 
-        
+        AspectRatio(
+          aspectRatio: 2.0,
+          child: Container(
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(18)),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 18.0, left: 12.0, top: 0, bottom:12),
+              child: BarChart(
+                barChartData(),
+              ),
+            ),
+          )
+        ),
 
 
       ],
@@ -140,6 +174,84 @@ class _LineChartMoodState extends State<LineChartMood> {
 
     return spots;
 
+  }
+
+  BarChartData barChartData() {
+    return BarChartData(
+      alignment: BarChartAlignment.spaceAround,
+      maxY: 20,
+      barTouchData: BarTouchData(
+              enabled: false,
+              touchTooltipData: BarTouchTooltipData(
+                tooltipBgColor: Colors.transparent,
+                tooltipPadding: const EdgeInsets.all(0),
+                tooltipBottomMargin: 8,
+                getTooltipItem: (
+                  BarChartGroupData group,
+                  int groupIndex,
+                  BarChartRodData rod,
+                  int rodIndex,
+                ) {
+                  return BarTooltipItem(
+                    rod.y.round().toString(),
+                    TextStyle(
+                      color: Colors.teal,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
+              ),
+            ),
+      titlesData: FlTitlesData(
+              show: true,
+              bottomTitles: SideTitles(
+                showTitles: false,
+                textStyle: TextStyle(color: Colors.teal, fontSize: 18, fontFamily: 'anakotmai medium'),
+                margin: 20,
+                getTitles: (double value) {
+            switch (value.toInt()) {
+              case 0:
+                return '☻';
+              case 1:
+                return '☻';
+              case 2:
+                return '☻';
+              case 3:
+                return '☻';
+              case 4:
+                return '☻';
+              default:
+                return '';
+            }
+          },
+              ),
+              leftTitles: SideTitles(showTitles: false),
+            ),
+            borderData: FlBorderData(show: true, border: Border.all(color: const Color(0xFF85A2A6), width: 1)),
+            barGroups: [
+              BarChartGroupData(
+                  x: 0,
+                  barRods: [BarChartRodData(width: 20, y: maniaCount.toDouble(), color: Color(0xFFbe9abf))],
+                  showingTooltipIndicators: [0]),
+              BarChartGroupData(
+                  x: 1,
+                  barRods: [BarChartRodData(width: 20, y: happyCount.toDouble(), color: Color(0xFF85A2A6))],
+                  showingTooltipIndicators: [0]),
+              BarChartGroupData(
+                  x: 2,
+                  barRods: [BarChartRodData(width: 20, y: normalCount.toDouble(), color: Color(0xFFced994))],
+                  showingTooltipIndicators: [0]),
+              BarChartGroupData(
+                  x: 3,
+                  barRods: [BarChartRodData(width: 20, y: unhappyCount.toDouble(), color: Color(0xFFf5d791))],
+                  showingTooltipIndicators: [0]),
+              BarChartGroupData(
+                  x: 3,
+                  barRods: [BarChartRodData(width: 20, y: depressCount.toDouble(), color: Color(0xFFF2695C))],
+                  showingTooltipIndicators: [0]),
+            
+            ],
+    );
   }
 
   LineChartData mainData() {
@@ -211,8 +323,7 @@ class _LineChartMoodState extends State<LineChartMood> {
           spots: getSpots(),
           isCurved: true,
           colors: [
-              const Color(0xFFF2695C).withOpacity(0.6),
-              const Color(0xFFADD4D9).withOpacity(0.6),
+              Colors.teal
           ],
           barWidth: 3,
           isStrokeCapRound: true,
@@ -221,17 +332,11 @@ class _LineChartMoodState extends State<LineChartMood> {
           ),
           belowBarData: BarAreaData(
             show: true,
-            colors: [
-              const Color(0xFFF2695C).withOpacity(0.3),
-              const Color(0xFFADD4D9).withOpacity(0.3),
-            ],
-            gradientColorStops: [0.3, 1.0],
-            gradientFrom: const Offset(0,0),
-            gradientTo: const Offset(0, 1),
+            colors: [Colors.white],
             spotsLine: BarAreaSpotsLine(
               show: true,
               flLineStyle: FlLine(
-                color: const Color(0xFFADD4D9),
+                color: Colors.grey[300],
                 strokeWidth: 2,
               )
             ),

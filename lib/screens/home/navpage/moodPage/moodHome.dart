@@ -23,8 +23,8 @@ class _MoodHomeState extends State<MoodHome> {
   final THCalendar _thCalendar = THCalendar();
 
   var sliderValue = 2.5;
-  Color moodColor = Color(0xFFf5d791);
-  String moodString = "เฉยๆ";
+  Color moodColor = Color(0xFFced994);
+  String moodString = "ปกติ";
   String moodE = "Normal";
 
   List<String> moodStringList = [
@@ -32,7 +32,7 @@ class _MoodHomeState extends State<MoodHome> {
     "รู้สึกแย่",
     "ปกติ",
     "รู้สึกดี",
-    "มีความสุขมาก"
+    "คึกคัก/โกรธง่าย"
   ];
 
     AssetImage moodImage = AssetImage('assets/pictures/normal1.png');
@@ -41,11 +41,11 @@ class _MoodHomeState extends State<MoodHome> {
 
   @override
   Widget build(BuildContext context) {
-
-    const Color unHappyColor = Color(0xFFADD4D9);
-    const Color depressColor = Color(0xFF85A2A6);
-    const Color normalColor = Color(0xFFf5d791);
-    const Color happyColor = Color(0xFFF29580);
+    
+    Color depressColor = Color(0xFFbe9abf);
+    const Color unHappyColor = Color(0xFF85A2A6);
+    Color normalColor = Color(0xFFced994);
+    const Color happyColor = Color(0xFFf5d791);
     const Color maniacColor = Color(0xFFF2695C);
 
     var iconThemeData = IconThemeData(color: const Color.fromARGB(255, 40, 40, 40));

@@ -231,7 +231,7 @@ class QuizResult extends StatelessWidget {
     List<Widget> list = List<Widget>();
 
     if (result == 0) {
-      list.add(new Text('คุณไม่มีคุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+      list.add(new Text('คุณไม่มีคุณมีแนวโน้มที่จะทำร้ายตนเองในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
       list.add(new Text('โดยมีคะแนน $result คะแนน'));
       list.add(new Container(child: Image.asset(happyPic), margin: EdgeInsets.symmetric(vertical: 20.0)));
       list.add(new Text('อย่างไรก็ตาม'));
@@ -267,13 +267,13 @@ class QuizResult extends StatelessWidget {
         ),));
     } else {
       if (result >= 1 && result < 9) {
-        list.add(new Text('คุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+        list.add(new Text('คุณมีแนวโน้มที่จะทำร้ายตนเองในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
         list.add(new Text('ระดับน้อย', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
       } else if (result >= 9 && result < 17) {
-        list.add(new Text('คุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+        list.add(new Text('คุณมีแนวโน้มที่จะทำร้ายตนเองในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
         list.add(new Text('ระดับปานกลาง', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
       } else if (result >= 17) {
-        list.add(new Text('คุณมีแนวโน้มที่จะฆ่าตัวตายในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
+        list.add(new Text('คุณมีแนวโน้มที่จะทำร้ายตนเองในปัจจุบัน', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
         list.add(new Text('ระดับรุนแรง', style: TextStyle(fontFamily: 'Anakotmai Medium',fontSize: 20, color: const Color.fromARGB(255, 40, 40, 40))));
       }
       list.add(new Text('โดยมีคะแนน $result คะแนน'));

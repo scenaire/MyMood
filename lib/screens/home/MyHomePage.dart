@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Authenticate/Firstpage.dart';
+import 'package:mymood/Screens/Home/instructions/aboutmePage.dart';
+import 'package:mymood/Screens/Home/instructions/instructionaboutMood.dart';
 import 'package:mymood/Screens/Home/navpage/others/hotline.dart';
 import 'package:mymood/Screens/Home/navpage/others/searchClinic.dart';
 import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
@@ -106,10 +108,24 @@ class _MyHomePageState extends State<MyHomePage> {
             // ),
             ListTile(
               title: Text(
+                      "เกี่ยวกับเรา",
+                      style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
+                    ),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => AboutMePage()));
+              },
+            ),
+
+            ListTile(
+              title: Text(
                       "แนะนำการใช้งาน",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => InsAboutMood()));
+              },
             ),
             ListTile(
               title: Text(
@@ -130,7 +146,7 @@ class _MyHomePageState extends State<MyHomePage> {
             // ),
             ListTile(
               title: Text(
-                      "ค้นหาคลีนิคสุขภาพจิตใกล้คุณ",
+                      "ค้นหาคลินิกสุขภาพจิตใกล้คุณ",
                       style: TextStyle(fontFamily: 'Prompt', fontSize: 16, color: Colors.grey[800], fontWeight: FontWeight.w600),
                     ),
               onTap: () {
@@ -148,6 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => HotlinePage()));
               },
             ),
+            
             ListTile(
               title: Text(
                       "ออกจากระบบ",
