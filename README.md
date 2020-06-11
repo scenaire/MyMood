@@ -29,14 +29,13 @@ In case I already deleted my firebase project
 1. Create your own firebase project
 2. Add new android app to your project
 3. Copy ```google-services.json``` to Folder ```android > app```
+
 ![image](https://www.img.in.th/images/da2d09e6d08c4f171f7f8a54a13ebca7.png)
 4. You can developing this project now.
 
 ## Contacts
 
-if you are computer science student who wanted to improving this application and you have a problem while developing, feel free to reach me via Twitter or Facebook
-
-Twitter : [@scenaire](https://twitter.com/Scenaire)
+if you are computer science student who wanted to improving this application and you have a problem while developing, feel free to reach me via Facebook
 
 Facebook : [Jiratchaya Yeeto](https://www.facebook.com/jiratchaya.yeeto)
 
