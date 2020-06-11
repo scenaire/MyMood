@@ -1,7 +1,8 @@
+//AUTHOR : Jiratchaya Yeeto
+
 import 'package:flutter/material.dart';
 import 'package:mymood/Models/User.dart';
 import 'package:mymood/Screens/Home/instructions/instructionsBeforeQuiz.dart';
-import 'package:mymood/Screens/Home/quizpage/TwoQPage.dart';
 
 class InstructionMain extends StatefulWidget {
 

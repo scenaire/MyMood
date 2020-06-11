@@ -1,5 +1,7 @@
-import 'dart:async';
+//AUTHOR : Jiratchaya Yeeto
+//AUTHOR : Rachanee Jaino (for the hospital location array. yep that's all she do in this project)
 
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

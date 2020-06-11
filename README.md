@@ -23,7 +23,7 @@ Flutter is provide full native performance on both iOS and Android but I develop
 1. Install Flutter, Android Studio.
 2. Clone this repository on your device.
 3. Clone [server-side repository](https://github.com/scenaire/mymood-server) on your device.
-4. You can developing this project now.
+4. You can developing this project.
 
 In case I already deleted my firebase project
 

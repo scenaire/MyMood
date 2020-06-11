@@ -1,8 +1,9 @@
+//AUTHOR : Jiratchaya Yeeto
+
 import 'package:flutter/material.dart';
 import 'package:mymood/Screens/Home/MyHomePage.dart';
 import 'package:mymood/Services/Auth.dart';
 import 'package:mymood/Widgets/loadingPage.dart';
-
 import 'forgotten.dart';
 
 class SignIn extends StatefulWidget {

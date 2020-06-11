@@ -1,3 +1,5 @@
+//AUTHOR : Jiratchaya Yeeto
+
 import 'package:mymood/Models/Mood.dart';
 
 class EvaluateMoodChart {

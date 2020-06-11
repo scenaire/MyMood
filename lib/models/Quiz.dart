@@ -1,3 +1,4 @@
+//AUTHOR : Jiratchaya Yeeto
 
 class Quiz {
 

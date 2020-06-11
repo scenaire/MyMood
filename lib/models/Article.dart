@@ -1,3 +1,5 @@
+//AUTHOR : Jiratchaya Yeeto
+
 class Article {
 
   String title;

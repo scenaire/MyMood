@@ -1,3 +1,5 @@
+//AUTHOR : Jiratchaya Yeeto
+
 import 'package:flutter/material.dart';
 import 'package:mymood/Models/Article.dart';
 import 'package:mymood/Screens/Home/navpage/article/eachArticle.dart';

@@ -1,3 +1,5 @@
+//AUTHOR : Jiratchaya Yeeto
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mymood/Models/Article.dart';
 

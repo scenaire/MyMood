@@ -1,3 +1,5 @@
+//AUTHOR : Jiratchaya Yeeto
+
 import 'package:flutter/material.dart';
 import 'package:mymood/Screens/Home/instructions/instructionsMain.dart';
 import 'package:mymood/Services/Auth.dart';
