@@ -14,6 +14,7 @@ My Mood Day is an improving application from [Thai's mood application](https://g
 * [Android Studio](https://developer.android.com/studio)
 * [VScode](https://code.visualstudio.com/) or other editor you like
 * Emulator (I choose Pixel 2 XL API 28)
+* Everything on [Server-side requirements](https://github.com/scenaire/mymood-server)
 
 ## Installation
 
@@ -21,16 +22,15 @@ Flutter is provide full native performance on both iOS and Android but I develop
 
 1. Install Flutter, Android Studio.
 2. Clone this repository on your device.
-3. Clone server-side repository on your device.
+3. Clone [server-side repository](https://github.com/scenaire/mymood-server) on your device.
 4. You can developing this project now.
 
 In case I already deleted my firebase project
 
 1. Create your own firebase project
 2. Add new android app to your project
-3. Copy ```google-services.json``` to Folder ```android > app```
-
-![image](https://www.img.in.th/images/da2d09e6d08c4f171f7f8a54a13ebca7.png)
+3. Copy ```google-services.json``` to Folder ```android > app```  
+![image](https://www.img.in.th/images/da2d09e6d08c4f171f7f8a54a13ebca7.png)  
 4. You can developing this project now.
 
 ## Contacts
