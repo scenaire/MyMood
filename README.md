@@ -5,19 +5,39 @@ My Mood Day is an improving application from [Thai's mood application](https://g
 
 ## Screenshots
 
-![image](https://www.img.in.th/images/4801a6f65217103d66033b88ee0a6e06.png) ![image](https://www.img.in.th/images/ae5579da5abc336a37990e8e645be8c7.png) ![image](https://www.img.in.th/images/d8c0983ce41439e1958555f61b0fe900.png) ![image](https://www.img.in.th/images/fb9254382a5c79118cf761f85141523d.png)
+![image](https://www.img.in.th/images/4801a6f65217103d66033b88ee0a6e06.png) ![image](https://www.img.in.th/images/ae5579da5abc336a37990e8e645be8c7.png) ![image](https://www.img.in.th/images/d8c0983ce41439e1958555f61b0fe900.png)
 
 ## Requirement
 
-fasfdsfafds
+* [Flutter](https://flutter.dev/)
+* [Firebase](https://firebase.google.com/)
+* [Android Studio](https://developer.android.com/studio)
+* [VScode](https://code.visualstudio.com/) or other editor you like
+* Emulator (I choose Pixel 2 XL API 28)
 
 ## Installation
 
+Flutter is provide full native performance on both iOS and Android but I developing android application so this is an installation instructor for android dev.
+
+1. Install Flutter, Android Studio.
+2. Clone this repository on your device.
+3. Clone server-side repository on your device.
+4. You can developing this project now.
+
+In case I already deleted my firebase project
+
+1. Create your own firebase project
+2. Add new android app to your project
+3. Copy ```google-services.json``` to Folder ```android > app```
+![image](https://www.img.in.th/images/da2d09e6d08c4f171f7f8a54a13ebca7.png)
+4. You can developing this project now.
+
 ## Contacts
 
-if you are computer science student who wanted to improving this application and you have a problem while developing, well Feel free to reach me via Twitter or Facebook
+if you are computer science student who wanted to improving this application and you have a problem while developing, feel free to reach me via Twitter or Facebook
 
 Twitter : [@scenaire](https://twitter.com/Scenaire)
+
 Facebook : [Jiratchaya Yeeto](https://www.facebook.com/jiratchaya.yeeto)
 
 ## Project Tree
