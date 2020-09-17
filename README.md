@@ -1,7 +1,7 @@
 
 # My Mood Day
 
-My Mood Day is an improving application from [Thai's mood application](https://github.com/nonproud/thaismood-android). This application offering an easy way for tracking mood for thai people with a cute emoticons.
+My Mood Day is an improving application from [Thai's mood application](https://github.com/nonproud/thaismood-android). This application offering an easy way for tracking mood for thai people with a cute emoticons. this application can determine the risk of suicidal and self-harm through written text by using Trie. 
 
 ## Screenshots
 
